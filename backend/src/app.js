@@ -5,6 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors')
 
+// cors para peticiones a la API
 app.use(cors()) 
 
 //Ejecuto el llamado a mis rutas

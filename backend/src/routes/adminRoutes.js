@@ -1,13 +1,13 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-// Metodo Get para traer el listado de los productos
+// Metodo Get para traer el listado de los productos - Joaquin
 
-// Metodo Post para crear
+// Metodo Post para crear - Joaquin
 
-// Metodo Put para editar el producto
+// Metodo Put para editar el producto - Yonatan
 
-// Metodo Delete para eliminar
+// Metodo Delete para eliminar - Yonatan
 
 
 
