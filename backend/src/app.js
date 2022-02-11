@@ -30,4 +30,4 @@ app.use(methodOverride('_method'));
 app.use('/api', routes);
 
 //Activando el servidor desde express
-app.listen('3001', () => console.log('Servidor corriendo en el puerto 3001'));
+app.listen('3001', () => console.log('Servidor corriendo en el puerto http://localhost:3001/'));
