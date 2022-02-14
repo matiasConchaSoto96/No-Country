@@ -4,11 +4,10 @@ var productsController = require("../controllers/productsController");
 
 /* CRUD */
 // Metodo Get para traer el listado de los productos - Joaquin
-router.get("/", productsController.listado)
+router.get("/", productsController.list)
 
 // Metodo Post para crear - Joaquin
-router.get("/crear", productsController.crear);
-router.post("/crear", productsController.guardado);
+router.post("/", productsController.store);
 
 // Metodo Put para editar el producto - Yonatan
 router.put("/update/:id", productsController.update)

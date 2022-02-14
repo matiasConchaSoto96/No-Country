@@ -6,29 +6,43 @@ const getUrl = (req) => {
 }
 
 module.exports = {
-    crear: function(req, res){
-        db.Product.findAll()
-            .then(function(categorias){
-                return res.render("creacionProductos", {categorias:categorias});
+    store:(req,res)=>{
+        const {
+            name,
+            price,
+            description,
+            stock,
+            featured,
+            discount,
+            id_category 
+        } = req.body
+        db.Product
+        .create({
+            name,
+            price,
+            description,
+            stock,
+            featured,
+            discount,
+            id_category 
+        })
+        
+        .then(productos => {
+            return res.status(200).json({
+                data:productos,
+                meta:{status:200, endpoint: getUrl(req)},
+                created: "ok"
             })
-    },
-    guardado: function (req,res){
-        db.Product.create({
-            name: req.body.name,
-            price: req.body.price,
-            description: req.body.description,
-            stock: req.body.stock,
-            featured: req.body.featured,
-            discount: req.body.discount,
-            id_category: req.body,id_category
-        }); 
+    })
+},
 
-        res.redirect("/")
-    },
-    listado: function (req,res){
+    list: function (req,res){
         db.Product.findAll()
-            .then(function(productos){
-                res.render("listadoProductos", {productos:productos})
+            .then(productos => {
+               return res.status(200).json({
+                meta:{status:200, endpoint: getUrl(req),total: productos.length}, 
+                   data: productos
+               })
             })
     }, 
     update: (req, res) => {
