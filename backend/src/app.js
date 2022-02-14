@@ -9,7 +9,8 @@ const cors = require('cors')
 app.use(cors()) 
 
 //Ejecuto el llamado a mis rutas
-const routes = require('./routes/adminRoutes');
+const routesApi = require('./routes/adminRoutes');
+const routesUsers = require('./routes/usersRoutes');
 
 // view engine setup
 app.set('views', path.resolve(__dirname, './views'));
@@ -28,7 +29,8 @@ app.use(bodyParser.json());
 //Aquí estoy disponiendo la posibilidad para utilizar el seteo en los formularios para el usod e los metodos put ó delete
 app.use(methodOverride('_method'));
 
-app.use('/api', routes);
+app.use('/api', routesApi);
+app.use('/user', routesUsers);
 
 //Activando el servidor desde express
 app.listen('3001', () => console.log('Servidor corriendo en el puerto http://localhost:3001/'));
