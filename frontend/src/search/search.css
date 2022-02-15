@@ -1,0 +1,33 @@
+.input-search {
+  width: 200px;
+  height: 40px;
+  border: 0;
+  font-size: 1.5rem;
+  color: #fff;
+  background-color: #03314B;
+  caret-color: #fff;
+}
+
+.input-search:focus {
+  outline: none;
+}
+
+.input-search::placeholder {
+  color: #1ecc97;
+}
+
+.lupa {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #1ecc97;
+}
+
+.search {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 250px;
+  border: thin solid #274E64; 
+  border-radius: 5px;
+  background-color: #03314B;
+}
