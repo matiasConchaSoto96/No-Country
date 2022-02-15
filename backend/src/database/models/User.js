@@ -23,17 +23,7 @@ module.exports = (sequelize, dataTypes) => {
         rol: {
             type: dataTypes.INTEGER(2).UNSIGNED,
             allowNull: false
-        },
-        /*bannerOk: {
-            type: dataTypes.INTEGER(2).UNSIGNED,
-            allowNull: false
-        },
-        social_id: {
-            type:dataTypes.STRING(60),
-        },
-        social_provider: {
-            type:dataTypes.STRING(45),
-        }*/
+        }
     }
     let config = {
         tableName: "users",

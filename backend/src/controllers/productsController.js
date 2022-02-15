@@ -29,9 +29,12 @@ module.exports = {
         
         .then(productos => {
             return res.status(200).json({
+                meta:{
+                    status:200, 
+                    endpoint: getUrl(req),
+                    msg: "Producto creado con éxito"
+                },
                 data:productos,
-                meta:{status:200, endpoint: getUrl(req)},
-                created: "ok"
             })
     })
 },
@@ -40,7 +43,11 @@ module.exports = {
         db.Product.findAll()
             .then(productos => {
                return res.status(200).json({
-                meta:{status:200, endpoint: getUrl(req),total: productos.length}, 
+                meta:{
+                    status:200, 
+                    endpoint: getUrl(req),
+                    total: productos.length
+                }, 
                    data: productos
                })
             })
@@ -73,7 +80,6 @@ module.exports = {
             if(result){
                 return res.status(201).json({
                     msg: "editado con exito",
-
                 })
             } else {
                 return res.status(201).json({
@@ -93,11 +99,11 @@ module.exports = {
         .then(result => {
             if(result){
                 return res.status(200).json({
-                    msg: "movie deleted successfully"
+                    msg: "Producto eliminado exitosamente"
                 })
             } else {
                 return res.status(200).json({
-                    msg: "no changes"
+                    msg: "Sin cambios"
                 })
             }
         })
@@ -108,7 +114,7 @@ module.exports = {
             return res.status(404).json({
                 meta: {
                     status: 404,
-                    msg: "wrong ID"
+                    msg: "Id equivocado"
                 }
             })
         } else {
@@ -133,7 +139,7 @@ module.exports = {
                     return res.status(404).json({
                         meta: {
                             status: 404,
-                            msg: "ID not found"
+                            msg: "Id no encontrado"
                         }
                     })
                 }
