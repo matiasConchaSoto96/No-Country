@@ -24,7 +24,7 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.INTEGER(2).UNSIGNED,
             allowNull: false
         },
-        bannerOk: {
+        /*bannerOk: {
             type: dataTypes.INTEGER(2).UNSIGNED,
             allowNull: false
         },
@@ -33,11 +33,12 @@ module.exports = (sequelize, dataTypes) => {
         },
         social_provider: {
             type:dataTypes.STRING(45),
-        }
+        }*/
     }
     let config = {
         tableName: "users",
-        timestamps: true
+        timestamps: false,
+       
     }
 
     const User = sequelize.define(alias, cols, config)

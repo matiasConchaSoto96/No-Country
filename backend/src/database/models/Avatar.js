@@ -25,7 +25,7 @@ module.exports = (sequelize, dataTypes) => {
 
     Avatar.associate = models => {
         Avatar.belongsTo(models.User, {
-            as: "user",
+            as: "users",
             foreignKey: "userId"
         })
     }
