@@ -1,0 +1,40 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.counter-container {
+  width: 130px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(3, 49, 75, 1);
+}
+
+.counter-container button {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: inherit;
+  border-radius: 10px;
+  border: solid 1px #274e64;
+  background-color: rgba(3, 49, 75, 1);
+  color: whitesmoke;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.counter-container div {
+  width: 50px;
+  margin: 0 10px 0 10px;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: whitesmoke;
+}

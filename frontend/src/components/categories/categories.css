@@ -1,0 +1,19 @@
+.carousel-container {
+  height: 100px;
+  background-color: rgba(3, 49, 75, 1);
+}
+
+.categories-button {
+  width: 50%;
+  height: 50px;
+  outline: inherit;
+  border-style: none;
+  border-radius: 10px;
+  border: solid 1px #274e64;
+  background-color: rgba(3, 49, 75, 1);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 17px;
+  color: whitesmoke;
+}
