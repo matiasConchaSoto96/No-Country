@@ -38,8 +38,8 @@ a:hover {
   z-index: 999;
   padding: 0.5rem;
   width: 100%;
-  height: calc(var(4rem - 0.5rem)); 
-  background-color: #03314B;
+  height: calc(var(4rem - 0.5rem));
+  background-color: #03314b;
 }
 
 .header article {
@@ -49,7 +49,7 @@ a:hover {
   padding: 1rem;
 }
 
-.logo a{
+.logo a {
   font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
@@ -63,7 +63,7 @@ a:hover {
 }
 
 .menu a {
-  padding: 0 .75rem;
+  padding: 0 0.75rem;
   font-size: 1rem;
   font-weight: bold;
   text-align: center;
