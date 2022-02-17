@@ -4,9 +4,11 @@ import { useState, createContext } from "react";
 export const AppContext = createContext();
 
 export const AppProvider = (props) => {
-  const [data, setData] = useState("data base");
+  const [count, setCount] = useState(0);
+  const [open, setOpen] = useState(false);
+
   return (
-    <AppContext.Provider value={{ data, setData }}>
+    <AppContext.Provider value={{ count, setCount, open, setOpen }}>
       {props.children}
     </AppContext.Provider>
   );
