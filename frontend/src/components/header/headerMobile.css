@@ -33,14 +33,15 @@ a:hover {
 }
 
 .header-mobile {
+  display: none;
   position: fixed;
   bottom: 0;
   left: 0;
   z-index: 999;
   padding: 1rem;
   width: 100%;
-  height: 4.5rem; 
-  background-color: #03314B;
+  height: 4.5rem;
+  background-color: #03314b;
 }
 
 .header-mobile article {
@@ -49,7 +50,7 @@ a:hover {
   align-items: center;
 }
 
-.logo-mobile a{
+.logo-mobile a {
   font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
@@ -63,9 +64,9 @@ a:hover {
   align-items: center;
   width: 3rem;
   font-size: 2rem;
-  border: thin solid #274E64;
-  border-radius: .3rem;
-  background-color: #03314B;
+  border: thin solid #274e64;
+  border-radius: 0.3rem;
+  background-color: #03314b;
   text-align: center;
   color: #fff;
   cursor: pointer;
@@ -82,7 +83,7 @@ a:hover {
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #03314B;
+  background-color: #03314b;
   opacity: 1;
   pointer-events: initial;
   transition: opacity 0.5s ease;
@@ -95,7 +96,7 @@ a:hover {
 
 .menu-mobile a {
   padding: 1rem;
-  font-size: 1.5rem;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
@@ -110,4 +111,24 @@ a:hover {
 /* ********** Utilities ********** */
 .none {
   display: none;
+}
+
+@media screen and (min-width: 321px) and (max-width: 768px) {
+  .header-mobile {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .header-mobile {
+    display: block;
+  }
+
+  .menu-mobile a {
+    font-size: 18px;
+  }
+
+  .logo-mobile a {
+    font-size: 26px;
+  }
 }

@@ -11,5 +11,17 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background-color: rgba(3, 49, 75, 1);
+  /* background-color: rgba(3, 49, 75, 1); */
+}
+
+@media screen and (min-width: 420px) and (max-width: 768px) {
+  .cards-container {
+    padding: 20px;
+  }
+}
+
+@media only screen and (max-width: 419px) {
+  .cards-container {
+    padding: 10px;
+  }
 }
