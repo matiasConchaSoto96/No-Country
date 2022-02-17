@@ -13,7 +13,6 @@ function Card() {
           <button className="card-buttons-edit">E</button>
         </div>
       </div>
-
       <h3>Nombre del producto</h3>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper

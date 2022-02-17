@@ -39,7 +39,7 @@ a:hover {
   padding: 0.5rem;
   width: 100%;
   height: calc(var(4rem - 0.5rem));
-  background-color: #03314b;
+  background-color: #03314b9d;
 }
 
 .header article {
@@ -69,4 +69,10 @@ a:hover {
   text-align: center;
   text-decoration: none;
   color: #1ecc97;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    display: none;
+  }
 }
