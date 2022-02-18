@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "../../Component/header/Header";
-import Categories from "../../Component/categories/Categories";
-import CardsContainer from "../../Component/cardsContainer/CardsContainer";
-import HeaderMobile from "../../Component/header/HeaderMobile";
+import Header from "../../Components/header/Header";
+import Categories from "../../Components/categories/Categories";
+import CardsContainer from "../../Components/cardsContainer/CardsContainer";
+import HeaderMobile from "../../Components/header/HeaderMobile";
 import "./products.css";
 
 function Products() {
