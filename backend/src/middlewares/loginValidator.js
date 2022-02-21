@@ -24,8 +24,8 @@ module.exports = [
     .custom(async (value, {req}) => {
       const user = await db.User.findOne({email: req.body.email});
       if (user) {
-        const passwordTrue = await compare(value, user.password);
-        return !passwordTrue && Promise.reject("El email o la contraseña son incorrectas");
+        const passwordTrue = await compare(value, user.pass);
+        return passwordTrue && Promise.reject("El email o la contraseña son incorrectas");
       }
     })
 ];

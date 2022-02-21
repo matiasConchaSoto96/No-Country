@@ -11,47 +11,38 @@ module.exports = {
   store:async (req,res)=>{
 
     let errors = validationResult(req);
-    if(errors.isEmpty()){
-     
-      const {
+    try {
+      if(errors.isEmpty()){
+        const {
+            name,
+            email,
+            pass,
+            rol
+        } = req.body
+
+        db.User
+        .create({
           name,
           email,
-          pass,
+          pass: await hash(pass, 10),
           rol
-      } = req.body
-      db.User
-      .create({
-        name,
-        email,
-        pass:await hash(password, 10),
-        rol
-      })
-      .then(usuarios => {
-          return res.status(200).json({
-              data:usuarios,
-              meta:{status:200, endpoint: getUrl(req)},
-              created: "ok"
-          })
-          
-      })
-      .catch(error => console.log(error))
-    }
-    else {
-      // Los errores que vengan del middleware lo guardamos en errors
-      const errorsObj = errors.mapped();
-
-      for (key in errorsObj) {
-        delete errorsObj[key].param;
-        delete errorsObj[key].location;
-      }
-      res.status(200).json({
+        })
+        .then(usuarios => {
+            return res.status(200).json({
+                data:usuarios,
+                meta:{status:200, endpoint: getUrl(req)},
+                created: "ok"
+            })
+            
+        })
+        }
+      } catch (err) {
+      res.status(404).json({
         meta: {
-          status: 200,
-          ok: false,
-        },
-        data: null,
-        errors:errorsObj
-      });
+          status: 404,
+          msg: err.message
+        }
+      })
     }
   },
 
