@@ -7,7 +7,9 @@ const loginValidator = require('../middlewares/loginValidator');
 
 
 // Metodo Post para crear - Joaquin
-router.post("/register", usersControllers.store);
+router.get("/", usersControllers.list);/*haciendo prueba de lista de usuarios*/
+
+router.post("/register", registerValidator ,usersControllers.store);
 
 router.post("/login", loginValidator, usersControllers.login);
 

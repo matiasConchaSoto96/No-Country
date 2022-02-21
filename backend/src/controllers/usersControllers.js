@@ -8,30 +8,69 @@ const getUrl = (req) => {
 
 module.exports = {
 
-  store:(req,res)=>{
-    const {
+  store:async (req,res)=>{
+
+    let errors = validationResult(req);
+    if(errors.isEmpty()){
+     
+      const {
+          name,
+          email,
+          pass,
+          rol
+      } = req.body
+      db.User
+      .create({
         name,
         email,
-        pass,
+        pass:await hash(password, 10),
         rol
-    } = req.body
-    db.User
-    .create({
-      name,
-      email,
-      pass,
-      rol
-    })
-    .then(usuarios => {
-        return res.status(200).json({
-            data:usuarios,
-            meta:{status:200, endpoint: getUrl(req)},
-            created: "ok"
-        })
-        
-    })
-    .catch(error => console.log(error))
+      })
+      .then(usuarios => {
+          return res.status(200).json({
+              data:usuarios,
+              meta:{status:200, endpoint: getUrl(req)},
+              created: "ok"
+          })
+          
+      })
+      .catch(error => console.log(error))
+    }
+    else {
+      // Los errores que vengan del middleware lo guardamos en errors
+      const errorsObj = errors.mapped();
+
+      for (key in errorsObj) {
+        delete errorsObj[key].param;
+        delete errorsObj[key].location;
+      }
+      res.status(200).json({
+        meta: {
+          status: 200,
+          ok: false,
+        },
+        data: null,
+        errors:errorsObj
+      });
+    }
   },
+
+
+  list: function (req,res){
+    db.User.findAll()
+        .then(usuarios => {
+           return res.status(200).json({
+            meta:{
+                status:200, 
+                endpoint: getUrl(req),
+                total: usuarios.length
+            }, 
+               data: usuarios
+           })
+        })
+}, 
+
+
 	login: async (req, res) => {
     let errors = validationResult(req)
     
