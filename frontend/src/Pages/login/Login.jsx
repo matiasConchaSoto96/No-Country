@@ -1,0 +1,74 @@
+import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import './login.css'
+import {AppContext} from '../../Context/AppContext'
+import useForm from '../../Hooks/useForm'
+
+export const Login = () => {
+    const {user, setUser} = useContext(AppContext)
+    const [form, handleChange] = useForm({ email: "", password: "" })
+    const { email, password } = form;
+    const [users, setUsers] = useState([])
+
+    useEffect(()=>{
+        if(users.length){
+            users.forEach(u => {
+                if(u.email === user.email && u.pass === user.password ) {
+                    alert(u.name)
+                    setUser({...user, logged: true})
+                } else {
+                    console.log("no encontrado")
+                }
+            })
+        }
+    }, [users, user])
+
+    const getData = async () => {
+        try {
+            const res = await fetch("http://localhost:3001/user")
+            const data = await res.json()
+            const set = await setUsers(data.data)
+        } catch (err) {
+            console.log(err);
+        }
+    } 
+    
+    const handleSubmit = (e) => {
+        e.preventDefault(form)
+        setUser(form)
+        getData()        
+    }
+    
+  return (
+    <div className='login-page'>
+        <div className='login-page_box'>
+            <div className='login-page_form'>
+                <form onSubmit={handleSubmit}>
+                    <p>
+                        <label htmlFor="email">Email</label>
+                        <input id="email" 
+                        name="email"
+                        value={email}
+                        onChange={handleChange}
+                        placeholder='Email'></input>
+                    </p>
+                    <p>
+                        <label htmlFor="contraseña">Contraseña</label>
+                        <input id="contraseña" 
+                        name="password"
+                        value={password}
+                        onChange={handleChange}
+                        placeholder='Contraseña'></input>
+                    </p>
+                    <p>
+                        <button type='submit'>Iniciar sesión</button>
+                    </p>
+                    <p>
+                        <span>Nuevo en AdminGamer? <Link to="/register">crea una cuenta</Link></span>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+  )
+}
