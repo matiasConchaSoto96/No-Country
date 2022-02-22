@@ -58,7 +58,7 @@ export const LoginComponent = () => {
                         <button type='submit'>Iniciar sesión</button>
                     </p>
                     <p>
-                        <span>Nuevo en AdminGamer? <Link to="/register">crea una cuenta</Link></span>
+                        <span>Nuevo en AdminGamer? <button onClick={}>crea una cuenta</button></span>
                     </p>
                 </form>
             </div>
