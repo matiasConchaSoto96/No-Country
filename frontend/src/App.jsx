@@ -13,12 +13,12 @@ function App() {
       <Routes>
         <Route path="/login" element={
           user.logged ?
-            <Navigate to="/home" />
+            <Navigate to="/" />
           : 
             <Login />
         } />
         <Route path="/products" element={<Products />} />
-        <Route exact path="/home" element={
+        <Route exact path="/" element={
           user.logged ?
             <Home />
           : 
