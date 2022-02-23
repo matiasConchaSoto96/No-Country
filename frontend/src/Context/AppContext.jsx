@@ -11,11 +11,11 @@ export const AppProvider = (props) => {
     password: "",
     logged: false
   });
-  const [registro, setRegistro] = useState(false)
+  const [register, setRegister] = useState(false)
 
 
   return (
-    <AppContext.Provider value={{ count, setCount, open, setOpen, user, setUser, registro, setRegistro }}>
+    <AppContext.Provider value={{ count, setCount, open, setOpen, user, setUser, register, setRegister }}>
       {props.children}
     </AppContext.Provider>
   );

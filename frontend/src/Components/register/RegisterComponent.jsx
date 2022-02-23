@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import {AppContext} from '../../Context/AppContext'
 import useForm from '../../Hooks/useForm'
 
-export const LoginComponent = () => {
+export const RegisterComponent = () => {
     const {user, setUser, setRegister} = useContext(AppContext)
-    const [form, handleChange] = useForm({ email: "", password: "" })
+    const [form, handleChange] = useForm({ email: "", password: "", name: "", lastname: "", passwordConfirm: "" })
     const { email, password } = form;
     const [users, setUsers] = useState([])
 
@@ -35,14 +35,30 @@ export const LoginComponent = () => {
         getData()        
     }
 
-    const handlerForm = () =>{
-        setRegister(true)
+    const handlerForm = () => {
+        setRegister(false)
     }
 
   return (
     <div className='login-page_box'>
             <div className='login-page_form'>
                 <form onSubmit={handleSubmit}>
+                <p>
+                        <label htmlFor="Nombre">Nombre</label>
+                        <input id="name" 
+                        name="name"
+                        /*value={name}*/
+                        onChange={handleChange}
+                        placeholder='Nombre'></input>
+                    </p>
+                    <p>
+                        <label htmlFor="Apellido">Apellido</label>
+                        <input id="lastname" 
+                        name="lastname"
+                        /*value={lastname}*/
+                        onChange={handleChange}
+                        placeholder='Apellido'></input>
+                    </p>
                     <p>
                         <label htmlFor="email">Email</label>
                         <input id="email" 
@@ -60,10 +76,18 @@ export const LoginComponent = () => {
                         placeholder='Contraseña'></input>
                     </p>
                     <p>
-                        <button type='submit'>Iniciar sesión</button>
+                        <label htmlFor="contraseñaConf">Confirmar contraseña</label>
+                        <input id="contraseñaConf" 
+                        name="passwordConfirm"
+                        /*value={passwordConfirm}*/
+                        onChange={handleChange}
+                        placeholder='Confirmar contraseña'></input>
                     </p>
                     <p>
-                        <span>Nuevo en AdminGamer? <button onClick = {handlerForm}>crea una cuenta</button></span>
+                        <button type='submit'>Registrarse</button>
+                    </p>
+                    <p>
+                        <span>Ya tienes una cuenta? <button onClick = {handlerForm} >Inicia sesión</button></span>
                     </p>
                 </form>
             </div>
