@@ -1,0 +1,292 @@
+/********** Components **********/
+/* Modal */
+.products-modal {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00000070;
+  transition: all 1s;
+}
+
+.products-modal-article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  max-width: 37rem;
+  padding: 2rem 3rem;
+  color: #fff;
+  border-radius: 10px;
+  background-color: #03314b;
+}
+
+.products-modal-content {
+  position: relative;
+}
+
+.products-modal-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: inherit;
+}
+
+/* Btn modal close */
+
+.btn-modal-close-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.btn-modal-close span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.btn-modal-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 980;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 2rem;
+  color: #fff;
+  background-color: #1ecc97;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Imagen */
+.img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* .products-modal-file {
+  
+} */
+
+.products-modal-img-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 13rem;
+  margin-bottom: 1rem;
+  border: thin solid #1ecc97;
+  border-radius: 10px;
+}
+
+.products-modal-img {
+  position: absolute;
+}
+
+/* Estilos de las div que contienen los inputs */
+
+.products-modal-form div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.products-modal-form .flex-center {
+  justify-content: center;
+}
+
+/* Estilos de los inputs */
+
+/* Inputs type text */
+.products-modal-form div input[type="text"] {
+  width: 40%;
+  padding: .3rem;
+  padding-left: 0;
+  border: 0;
+  border-bottom: thin solid #1ecc97;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #03314b;
+  caret-color: #fff;
+  outline: none;
+}
+
+.products-modal-form div input[type="text"]::placeholder {
+  font-size: 1rem;
+  color: #fff;
+}
+
+/* inputs type number */
+.products-modal-form div input[type="number"] {
+  width: 40%;
+  padding: .3rem;
+  padding-left: 0;
+  border: 0;
+  border-bottom: thin solid #1ecc97;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #03314b;
+  caret-color: #fff;
+  outline: none;
+}
+
+.products-modal-form div input[type="number"]::placeholder {
+  font-size: 1rem;
+  color: #fff;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.products-modal-form div select {
+  width: 40%;
+  padding: .3rem;
+  padding-left: 0;
+  border: 0;
+  border-bottom: thin solid #1ecc97;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #03314b;
+  caret-color: #fff;
+  outline: none;
+}
+
+/* Input cantidad de productos */
+
+.products-modal-form .form-number-products.flex-right {
+  justify-content: flex-end;
+}
+
+.products-modal-article label {
+  font-size: 1.1rem;
+}
+
+.products-modal-form .form-number-products {
+  margin-top: 1rem;
+}
+
+.products-modal-form #number-products {
+  width: 24%;
+  padding: 0;
+  padding-top: 0.3rem;
+  border: 0;
+}
+
+.products-modal-form .form-number-products label {
+  padding: 0.3rem;
+  padding-left: 0;
+  border-bottom: thin solid #1ecc97;
+}
+
+/* input type checkbox */
+
+.products-modal-form .form-featured-product {
+  margin-bottom: 1.5rem;
+}
+
+.form-featured-product input[type="checkbox"] + label::before {
+  content: "";
+	width: 1.2rem;
+	height: 1.2rem;
+	float: left;
+	margin: 1.1rem 0.5rem 0 0;
+	border: 2px solid #ccc;
+	background: #fff;
+  /* border: thin solid #1ecc97;
+  color: #1ecc97;
+  outline: none; */
+}
+
+.form-featured-product input[type="checkbox"]:checked + label::before {
+  border-color: #1ecc97;
+}
+
+.form-featured-product input[type="checkbox"]:checked + label::after {
+  content: "";
+  width: 1rem;
+  height: .5rem;
+  border: 4px solid #0fbf12;
+  float: left;
+  margin-left: -1.6rem;
+  border-right: 0;
+  border-top: 0;
+  margin-top: 1.4rem;
+  transform: rotate(-55deg);
+}
+
+.form-featured-product input[type="checkbox"] {
+	display: none;
+}
+
+.form-featured-product input[type="checkbox"] + label {
+  font-weight: bold;
+  line-height: 3em;
+  color: #fff;
+}
+
+.form-featured-product input[type="checkbox"]:checked + label {
+  color: #1ecc97;
+}
+
+/*Text-area*/
+.products-modal-article textarea {
+  width: 90%;
+  padding: .5rem;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  color: #fff;
+  border: thin solid #1ecc97;
+  border-radius: 10px;
+  background-color: #03314b;
+  caret-color: #fff;
+  resize: none;
+}
+
+.products-modal-article textarea::placeholder {
+  font-size: 1rem;
+  color: #fff;
+}
+
+.products-modal-article textarea:focus {
+  outline: none;
+}
+
+/*Btn*/
+.products-modal-article input[type="button"] {
+  width: 45%;
+  padding: .5rem;
+  font-size: 1rem;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  background-color: #1ecc97;
+  outline: none;
+}
+
+/********** Utilities **********/
+.none {
+  display: none;
+  pointer-events: none;
+}
