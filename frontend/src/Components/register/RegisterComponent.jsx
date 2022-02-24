@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import useForm from "../../Hooks/useForm";
 
 export const RegisterComponent = () => {
-  const { user, setUser, setRegister } = useContext(AppContext);
+  const { newUser, setNewUser, setRegister } = useContext(AppContext);
   const [form, handleChange] = useForm({
     email: "",
     password: "",
@@ -12,33 +12,26 @@ export const RegisterComponent = () => {
     lastname: "",
     passwordConfirm: "",
   });
-  const { email, password } = form;
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    if (users.length) {
-      users.forEach((u) => {
-        if (u.email === user.email && u.pass === user.password) {
-          setUser({ ...user, logged: true });
-        }
-      });
-    }
-  }, [users, user]);
-
-  const getData = async () => {
-    try {
-      const res = await fetch("http://localhost:3001/user");
-      const data = await res.json();
-      const set = await setUsers(data.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const { name, lastname, email, password } = form;
 
   const handleSubmit = (e) => {
     e.preventDefault(form);
-    setUser(form);
-    getData();
+    setNewUser(form);
+    console.log(newUser);
+    addUser();
+  };
+
+  const addUser = () => {
+    fetch("http://localhost:3001/user", {
+      method: "POST",
+      body: JSON.stringify({
+        name: newUser.name,
+        email: newUser.email,
+        pass: newUser.password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
   };
 
   const handlerForm = () => {
@@ -54,7 +47,7 @@ export const RegisterComponent = () => {
             <input
               id="name"
               name="name"
-              /*value={name}*/
+              value={name}
               onChange={handleChange}
               placeholder="Nombre"
             ></input>
@@ -64,7 +57,7 @@ export const RegisterComponent = () => {
             <input
               id="lastname"
               name="lastname"
-              /*value={lastname}*/
+              value={lastname}
               onChange={handleChange}
               placeholder="Apellido"
             ></input>

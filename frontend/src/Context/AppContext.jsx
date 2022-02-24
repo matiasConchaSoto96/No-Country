@@ -10,6 +10,13 @@ export const AppProvider = (props) => {
     password: "",
     logged: false,
   });
+  const [newUser, setNewUser] = useState({
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+    logged: false,
+  });
   const [register, setRegister] = useState(false);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -27,6 +34,8 @@ export const AppProvider = (props) => {
         setProducts,
         openModal,
         setOpenModal,
+        newUser,
+        setNewUser,
       }}
     >
       {props.children}
