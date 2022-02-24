@@ -10,29 +10,28 @@ export const RegisterComponent = () => {
     password: "",
     name: "",
     lastname: "",
-    passwordConfirm: "",
+    rol: 1
   });
   const { name, lastname, email, password } = form;
 
-  const handleSubmit = (e) => {
-    e.preventDefault(form);
-    setNewUser(form);
-    console.log(newUser);
-    addUser();
-  };
-
   const addUser = () => {
-    fetch("http://localhost:3001/user", {
+    console.log(form)
+    fetch("http://localhost:3001/user/register", {
+      body: JSON.stringify(form),
       method: "POST",
-      body: JSON.stringify({
-        name: newUser.name,
-        email: newUser.email,
-        pass: newUser.password,
-      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
       .then((response) => response.json())
       .then((json) => console.log(json));
   };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addUser();
+  };
+
 
   const handlerForm = () => {
     setRegister(false);
@@ -82,16 +81,16 @@ export const RegisterComponent = () => {
               placeholder="Contraseña"
             ></input>
           </p>
-          <p>
+          {/* <p>
             <label htmlFor="contraseñaConf">Confirmar contraseña</label>
             <input
               id="contraseñaConf"
               name="passwordConfirm"
-              /*value={passwordConfirm}*/
+              value={passwordConfirm}
               onChange={handleChange}
               placeholder="Confirmar contraseña"
             ></input>
-          </p>
+          </p> */}
           <p>
             <button type="submit">Registrarse</button>
           </p>
