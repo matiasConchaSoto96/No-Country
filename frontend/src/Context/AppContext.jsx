@@ -4,18 +4,31 @@ import { useState, createContext } from "react";
 export const AppContext = createContext();
 
 export const AppProvider = (props) => {
-  const [count, setCount] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [products, setProducts] = useState([]);
   const [user, setUser] = useState({
     email: "",
     password: "",
-    logged: false
+    logged: false,
   });
-  const [register, setRegister] = useState(false)
-
+  const [register, setRegister] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   return (
-    <AppContext.Provider value={{ count, setCount, open, setOpen, user, setUser, register, setRegister }}>
+    <AppContext.Provider
+      value={{
+        open,
+        setOpen,
+        user,
+        setUser,
+        register,
+        setRegister,
+        products,
+        setProducts,
+        openModal,
+        setOpenModal,
+      }}
+    >
       {props.children}
     </AppContext.Provider>
   );

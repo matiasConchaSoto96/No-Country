@@ -1,8 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { AppContext } from "../../Context/AppContext";
+import { Link, useNavigate } from "react-router-dom";
 import "./header.css";
 
 function Header() {
+  const { user, setUser, setOpenModal } = useContext(AppContext);
+  let navigate = useNavigate();
+
+  const handlerAdd = () => {
+    setOpenModal(true);
+  };
+
+  const handlerLoginOut = () => {
+    setUser({ ...user, logged: false });
+    navigate("/login");
+  };
   return (
     <header className="header">
       <article className="container">
@@ -12,8 +24,13 @@ function Header() {
         <nav className="menu">
           <Link to="/">Home</Link>
           <Link to="/products">Productos</Link>
-          <a href="">Agregar Producto</a>
-          <a href="">Configuración</a>
+          <a href="#" onClick={handlerAdd}>
+            Agregar Producto
+          </a>
+          <a href="#">Configuración</a>
+          <a href="#" onClick={handlerLoginOut}>
+            Cerrar Sesión
+          </a>
         </nav>
       </article>
     </header>

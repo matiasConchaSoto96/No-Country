@@ -2,23 +2,48 @@ import React, { useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
 import "./counter.css";
 
-function Counter() {
-  const { count, setCount } = useContext(AppContext);
+function Counter({ stock, id }) {
+  const { products, setProducts } = useContext(AppContext);
+  const increase = (id) => {
+    let newList = products.map((product) => {
+      if (id === product.id) {
+        return {
+          ...product,
+          stock: (product.stock += 1),
+        };
+      }
+      return product;
+    });
+    setProducts(newList);
+  };
+
+  const decrease = (id) => {
+    let newList = products.map((product) => {
+      if (id === product.id) {
+        return {
+          ...product,
+          stock: (product.stock -= 1),
+        };
+      }
+      return product;
+    });
+    setProducts(newList);
+  };
 
   const handlerPlus = () => {
-    setCount(count + 1);
+    increase(id);
   };
 
   const handlerMinus = () => {
-    setCount(count - 1);
+    decrease(id);
   };
 
   return (
     <div className="counter-container">
-      <button onClick={handlerMinus} disabled={count === 0}>
+      <button onClick={handlerMinus} disabled={stock === 0}>
         -
       </button>
-      <div>{count}</div>
+      <div>{stock}</div>
       <button onClick={handlerPlus}>+</button>
     </div>
   );
