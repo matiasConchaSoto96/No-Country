@@ -4,35 +4,32 @@ import { AppContext } from "../../Context/AppContext";
 import useForm from "../../Hooks/useForm";
 
 export const LoginComponent = () => {
-  const { user, setUser, setRegister } = useContext(AppContext);
+  const { user, setUser, setRegister, errors, setErrors } = useContext(AppContext);
   const [form, handleChange] = useForm({ email: "", password: "" });
   const { email, password } = form;
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    if (users.length) {
-      users.forEach((u) => {
-        if (u.email === user.email && u.password === user.password) {
-          setUser({ ...user, logged: true });
-        }
-      });
-    }
-  }, [users, user]);
-
-  const getData = async () => {
-    try {
-      const res = await fetch("http://localhost:3001/user");
-      const data = await res.json();
-      const set = await setUsers(data.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  function loginUser () {
+    fetch("http://localhost:3001/user/login", {
+      body: JSON.stringify(form),
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response.json())
+    .then((json) => {
+      setErrors(json.errors)
+      if(json.meta.ok){
+        setUser({ ...user, logged: true });
+      }
+    })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault(form);
-    setUser(form);
-    getData();
+
+    loginUser(form);
   };
 
   const handlerForm = () => {
@@ -52,6 +49,7 @@ export const LoginComponent = () => {
               onChange={handleChange}
               placeholder="Email"
             ></input>
+            <div className="text-danger">{errors && errors["email"]?.msg}</div>
           </p>
           <p>
             <label htmlFor="contraseña">Contraseña</label>
@@ -62,6 +60,7 @@ export const LoginComponent = () => {
               onChange={handleChange}
               placeholder="Contraseña"
             ></input>
+            <div className="text-danger">{errors && errors["password"]?.msg}</div>
           </p>
           <p>
             <button type="submit">Iniciar sesión</button>

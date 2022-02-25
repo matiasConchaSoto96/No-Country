@@ -7,43 +7,48 @@ const getUrl = (req) => {
 };
 
 module.exports = {
-
   store:async (req,res)=>{
+    const errors = validationResult(req);
 
-    let errors = validationResult(req);
-    try {
-      if(errors.isEmpty()){
-        const {
-            name,
-            email,
-            pass,
-            rol
-        } = req.body
-
-        db.User
-        .create({
-          name,
+      if (errors.isEmpty()) {
+        const { email, name, lastname, password } = req.body;
+        db.User.create({
           email,
-          pass: await hash(pass, 10),
-          rol
+          name,
+          lastname,
+          password: await hash(password, 10),
+          rol: 1,
         })
-        .then(usuarios => {
-            return res.status(200).json({
-                data:usuarios,
-                meta:{status:200, endpoint: getUrl(req)},
-                created: "ok"
-            })
-            
+        .then(user => {
+          res.status(200).json({
+             data: user,
+             meta: {
+               ok: true,
+               status: 200,
+               msg: "Usuario creado con exito",
+             },
+             errors:null
+           });
         })
+
+      } else {
+        const errorsObj = errors.mapped();
+        for (key in errorsObj) {
+          delete errorsObj[key].param;
+          delete errorsObj[key].location;
         }
-      } catch (err) {
-      res.status(404).json({
-        meta: {
-          status: 404,
-          msg: err.message
-        }
-      })
-    }
+  
+        return res.status(200).json({
+          meta: {
+            ok: false,
+            status: 200,
+            msg: "El registro no se realizo",
+          },
+          data: null,
+          errors:errorsObj
+        });
+      }
+
   },
 
 
@@ -59,7 +64,7 @@ module.exports = {
                data: usuarios
            })
         })
-}, 
+  }, 
 
 
 	login: async (req, res) => {

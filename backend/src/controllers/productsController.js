@@ -36,11 +36,15 @@ module.exports = {
                 },
                 data:productos,
             })
-    })
-},
+        })
+    },
 
     list: function (req,res){
-        db.Product.findAll()
+        db.Product.findAll({
+            include: [
+                {association: "categories"},
+             ]
+        })
             .then(productos => {
                return res.status(200).json({
                 meta:{
@@ -134,6 +138,59 @@ module.exports = {
                         },
                         // en data se guarda la informacion del producto
                         data: pro
+                    })
+                } else {
+                    return res.status(404).json({
+                        meta: {
+                            status: 404,
+                            msg: "Id no encontrado"
+                        }
+                    })
+                }
+            })
+            .catch(error => console.log(error))
+        }
+    },
+
+    getCategories: (req, res) => {
+        db.Category.findAll({
+            include: [
+                {association: "products"},
+             ]
+        })
+            .then(categories => {
+               return res.status(200).json({
+                meta:{
+                    status:200, 
+                    endpoint: getUrl(req),
+                    total: categories.length
+                }, 
+                   data: categories
+               })
+            })
+    },
+    postCategories: (req, res) => {
+        if(req.params.id % 1 !== 0 || req.params.id < 0){
+            return res.status(404).json({
+                meta: {
+                    status: 404,
+                    msg: "Id equivocado"
+                }
+            })
+        } else {
+            db.Category.findOne({
+                where: {
+                    id: req.params.id,
+                }
+            })
+            .then(cat => {
+                if(cat){
+                    return res.status(200).json({
+                        meta: {
+                            endpoint: getUrl(req),
+                            status: 200
+                        },
+                        data: cat
                     })
                 } else {
                     return res.status(404).json({

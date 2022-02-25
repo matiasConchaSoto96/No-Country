@@ -13,11 +13,16 @@ router.post("/", productsController.store);
 router.put("/update/:id", productsController.update)
 
 // Metodo Delete para eliminar - Yonatan
-router.get("/delete/:id", productsController.delete)
+router.delete("/delete/:id", productsController.delete)
 
 // Metodo Get para tomar un producto 
 router.get("/:id", productsController.getOne)
 
 
+
+// Metodo Post para crear - Joaquin
+router.get("/categories", productsController.getCategories);
+
+router.get("/categories/:id", productsController.postCategories);
 
 module.exports = router;
