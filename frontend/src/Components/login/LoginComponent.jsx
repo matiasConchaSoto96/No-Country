@@ -12,7 +12,7 @@ export const LoginComponent = () => {
   useEffect(() => {
     if (users.length) {
       users.forEach((u) => {
-        if (u.email === user.email && u.pass === user.password) {
+        if (u.email === user.email && u.password === user.password) {
           setUser({ ...user, logged: true });
         }
       });

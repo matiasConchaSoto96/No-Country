@@ -1,28 +1,33 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import useForm from "../../Hooks/useForm";
 
 export const RegisterComponent = () => {
-  const { newUser, setNewUser, setRegister } = useContext(AppContext);
+  const { setRegister } = useContext(AppContext);
   const [form, handleChange] = useForm({
     email: "",
     password: "",
     name: "",
+    lastname: "",
+    rol: 1,
   });
-  const { name, email, password } = form;
+  const { name, lastname, email, password } = form;
 
   const addUser = () => {
+    console.log(form);
     fetch("http://localhost:3001/user/register", {
-      method: "POST",
       body: JSON.stringify(form),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then((response) => response.json())
       .then((json) => console.log(json));
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(form);
+    e.preventDefault();
     addUser();
   };
 
@@ -64,6 +69,16 @@ export const RegisterComponent = () => {
               placeholder="Contraseña"
             ></input>
           </p>
+          {/* <p>
+            <label htmlFor="contraseñaConf">Confirmar contraseña</label>
+            <input
+              id="contraseñaConf"
+              name="passwordConfirm"
+              value={passwordConfirm}
+              onChange={handleChange}
+              placeholder="Confirmar contraseña"
+            ></input>
+          </p> */}
           <p>
             <button type="submit">Registrarse</button>
           </p>

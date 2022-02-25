@@ -6,6 +6,7 @@ import "./card.css";
 import uno from "../../resources/uno.jpeg";
 
 function Card({ id, name, description, price, stock, category }) {
+
   return (
     <div className="card-container">
       <div className="image-container">
@@ -31,6 +32,14 @@ function Card({ id, name, description, price, stock, category }) {
 
 function PopupDelete({ id }) {
   let navigate = useNavigate();
+
+  function deleteProduct(id) {
+    fetch(`http://localhost:3001/api/delete/${id}`, {
+      method: "DELETE",
+    })
+    navigate("/");
+  } 
+
   return (
     <Popup
       className="popup-background"
@@ -58,8 +67,8 @@ function PopupDelete({ id }) {
             <button
               className="popup-btn"
               onClick={() => {
+                deleteProduct(id);
                 close();
-                navigate("/");
               }}
             >
               Eliminar
