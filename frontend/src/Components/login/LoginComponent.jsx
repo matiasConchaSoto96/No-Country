@@ -12,26 +12,27 @@ export const LoginComponent = () => {
   useEffect(() => {
     if (users.length) {
       users.forEach((u) => {
-        if (u.email === user.email && u.password === user.password) {
+        if (u.email === user.email && u.pass === user.password) {
           setUser({ ...user, logged: true });
         }
       });
     }
-  }, [users, user]);
+  }, [users]);
 
   const getData = async () => {
     try {
       const res = await fetch("http://localhost:3001/user");
       const data = await res.json();
-      const set = await setUsers(data.data);
+      setUsers(data.data);
     } catch (err) {
       console.log(err);
     }
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(form);
+    e.preventDefault();
     setUser(form);
+
     getData();
   };
 
