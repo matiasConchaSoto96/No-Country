@@ -9,29 +9,21 @@ export const RegisterComponent = () => {
     email: "",
     password: "",
     name: "",
-    lastname: "",
-    passwordConfirm: "",
   });
-  const { name, lastname, email, password } = form;
-
-  const handleSubmit = (e) => {
-    e.preventDefault(form);
-    setNewUser(form);
-    console.log(newUser);
-    addUser();
-  };
+  const { name, email, password } = form;
 
   const addUser = () => {
-    fetch("http://localhost:3001/user", {
+    fetch("http://localhost:3001/user/register", {
       method: "POST",
-      body: JSON.stringify({
-        name: newUser.name,
-        email: newUser.email,
-        pass: newUser.password,
-      }),
+      body: JSON.stringify(form),
     })
       .then((response) => response.json())
       .then((json) => console.log(json));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(form);
+    addUser();
   };
 
   const handlerForm = () => {
@@ -53,16 +45,6 @@ export const RegisterComponent = () => {
             ></input>
           </p>
           <p>
-            <label htmlFor="Apellido">Apellido</label>
-            <input
-              id="lastname"
-              name="lastname"
-              value={lastname}
-              onChange={handleChange}
-              placeholder="Apellido"
-            ></input>
-          </p>
-          <p>
             <label htmlFor="email">Email</label>
             <input
               id="email"
@@ -80,16 +62,6 @@ export const RegisterComponent = () => {
               value={password}
               onChange={handleChange}
               placeholder="Contraseña"
-            ></input>
-          </p>
-          <p>
-            <label htmlFor="contraseñaConf">Confirmar contraseña</label>
-            <input
-              id="contraseñaConf"
-              name="passwordConfirm"
-              /*value={passwordConfirm}*/
-              onChange={handleChange}
-              placeholder="Confirmar contraseña"
             ></input>
           </p>
           <p>

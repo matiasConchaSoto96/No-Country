@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { AppContext } from "../../Context/AppContext";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./categories.css";
+import loading from "../../resources/rings.svg";
 
 function Categories() {
+  const { categories, setCategories } = useContext(AppContext);
+
+  // useEffect(() => {
+  //   let endpointRequest = `http://localhost:3001/api/categorias`;
+  //   fetch(endpointRequest)
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //       // setCategories(data.data);
+  //       // console.log(Categories);
+  //     });
+  // }, []);
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1030 },
@@ -33,17 +51,21 @@ function Categories() {
           infinite={true}
           containerClass="carousel-container"
         >
-          <button className="categories-button">Categoria A</button>
-          <button className="categories-button">Categoria B</button>
-          <button className="categories-button">Categoria C</button>
-          <button className="categories-button">Categoria D</button>
-          <button className="categories-button">Categoria E</button>
-          <button className="categories-button">Categoria F</button>
-          <button className="categories-button">Categoria G</button>
-          <button className="categories-button">Categoria H</button>
-          <button className="categories-button">Categoria I</button>
-          <button className="categories-button">Categoria J</button>
-          <button className="categories-button">Categoria K</button>
+          {/* {categories.length > 0 ? (
+            categories.map((category) => (
+              <button className="categories-button" id={category.id}>
+                {category.name}
+              </button>
+            ))
+          ) : (
+            <img src={loading} alt="Loader" className="loader" />
+          )} */}
+          <button className="categories-button">Categoria a</button>
+          <button className="categories-button">Categoria b</button>
+          <button className="categories-button">Categoria c</button>
+          <button className="categories-button">Categoria d</button>
+          <button className="categories-button">Categoria e</button>
+          <button className="categories-button">Categoria f</button>
         </Carousel>
       </div>
     </>
