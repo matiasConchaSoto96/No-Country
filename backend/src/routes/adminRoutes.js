@@ -6,6 +6,8 @@ var productsController = require("../controllers/productsController");
 // Metodo Get para traer el listado de los productos - Joaquin
 router.get("/", productsController.list)
 
+router.get("/categorias", productsController.category)
+
 // Metodo Post para crear - Joaquin
 router.post("/", productsController.store);
 
