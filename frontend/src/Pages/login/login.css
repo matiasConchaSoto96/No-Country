@@ -12,6 +12,40 @@
   background-size: cover;
   height: 100vh;
 }
+.login-page_names {
+  display: flex;
+  gap: 5px;
+}
+.login-page_img {
+  display: flex;
+  justify-content: center;
+}
+.login-page_img img {
+  animation: rotation 5s infinite linear;
+}
+@-webkit-keyframes rotation {
+  0% {-webkit-transform: rotateY(0deg);}
+  30% {-webkit-transform: rotateY(360deg);}
+  50% {-webkit-transform: rotateY(360deg);}
+  74% {-webkit-transform: rotateY(360deg);}
+  75% {-webkit-transform: rotate(25deg);}
+  80% {-webkit-transform: rotate(-25deg);}
+  83% {-webkit-transform: rotate(-0deg);}
+  99% {-webkit-transform: rotate(-0deg);}
+  100% {-webkit-transform: rotate(0deg);}
+}
+
+@keyframes rotation {
+  0% {-webkit-transform: rotateY(0deg);}
+  30% {-webkit-transform: rotateY(360deg);}
+  50% {-webkit-transform: rotateY(360deg);}
+  74% {-webkit-transform: rotateY(360deg);}
+  75% {-webkit-transform: rotate(25deg);}
+  80% {-webkit-transform: rotate(-25deg);}
+  83% {-webkit-transform: rotate(-0deg);}
+  99% {-webkit-transform: rotate(-0deg);}
+  100% {-webkit-transform: rotate(0deg);}
+} 
 
 .login-page_box {
   display: flex;
@@ -35,6 +69,13 @@
   background: none;
   border: none;
   border-bottom: 2px solid #1ecc97;
+  color: #fff;
+}
+.login-page_form p input::placeholder {
+  color: #fff;
+}
+.login-page_form p input:focus {
+  border: none;
 }
 .login-page_form p button {
   background-color: #1ecc97;
@@ -50,4 +91,16 @@
 .linkto {
   color: #1ecc97;
   cursor: pointer;
+}
+.check {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.check input {
+  margin-right: 12px;
+}
+
+.text-danger {
+  color: white;
 }

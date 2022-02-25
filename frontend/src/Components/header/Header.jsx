@@ -13,6 +13,7 @@ function Header() {
 
   const handlerLoginOut = () => {
     setUser({ ...user, logged: false });
+    localStorage.removeItem('user')
     navigate("/login");
   };
   return (

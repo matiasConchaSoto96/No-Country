@@ -6,6 +6,8 @@ export const AppContext = createContext();
 export const AppProvider = (props) => {
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState({
+    name: "",
+    lastname: "",
     email: "",
     password: "",
     logged: false,

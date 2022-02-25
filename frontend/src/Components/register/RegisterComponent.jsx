@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import useForm from "../../Hooks/useForm";
+import logo from '../../resources/ag.png'
 
 export const RegisterComponent = () => {
   const { newUser, setNewUser, setRegister, errors, setErrors } = useContext(AppContext);
@@ -47,30 +47,32 @@ export const RegisterComponent = () => {
   return (
     <div className="login-page_box">
       <div className="login-page_form">
+        <div className="login-page_img">
+          <img src={logo}></img>
+        </div>
         <form onSubmit={handleSubmit}>
+          <div className="login-page_names">
+            <p>
+              <input
+                id="name"
+                name="name"
+                value={name}
+                onChange={handleChange}
+                placeholder="Nombre"
+              ></input>
+              <div className="text-danger">{errors && errors["name"]?.msg}</div>
+            </p>
+            <p>
+              <input
+                id="lastname"
+                name="lastname"
+                value={lastname}
+                onChange={handleChange}
+                placeholder="Apellido"
+              ></input>
+            </p>
+          </div>
           <p>
-            <label htmlFor="Nombre">Nombre</label>
-            <input
-              id="name"
-              name="name"
-              value={name}
-              onChange={handleChange}
-              placeholder="Nombre"
-            ></input>
-            <div className="text-danger">{errors && errors["name"]?.msg}</div>
-          </p>
-          <p>
-            <label htmlFor="Apellido">Apellido</label>
-            <input
-              id="lastname"
-              name="lastname"
-              value={lastname}
-              onChange={handleChange}
-              placeholder="Apellido"
-            ></input>
-          </p>
-          <p>
-            <label htmlFor="email">Email</label>
             <input
               id="email"
               name="email"
@@ -81,7 +83,6 @@ export const RegisterComponent = () => {
             <div className="text-danger">{errors && errors["email"]?.msg}</div>
           </p>
           <p>
-            <label htmlFor="contraseña">Contraseña</label>
             <input
               id="contraseña"
               name="password"
@@ -93,7 +94,6 @@ export const RegisterComponent = () => {
             <div className="text-danger">{errors && errors["password"]?.msg}</div>
           </p>
           <p>
-            <label htmlFor="contraseñaConf">Confirmar contraseña</label>
             <input
               id="contraseñaConf"
               name="passwordConfirm"

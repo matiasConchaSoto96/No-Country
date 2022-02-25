@@ -1,13 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import useForm from "../../Hooks/useForm";
+import logo from '../../resources/ag.png'
 
 export const LoginComponent = () => {
   const { user, setUser, setRegister, errors, setErrors } = useContext(AppContext);
   const [form, handleChange] = useForm({ email: "", password: "" });
   const { email, password } = form;
-  const [users, setUsers] = useState([]);
+  const [check, setCheck] = useState(false)
+
+  const handleChangeCheck = (e) => {
+      if(e.target.checked){
+        setCheck(true)
+      } else {
+        setCheck(false)
+      }
+  }
 
   function loginUser () {
     fetch("http://localhost:3001/user/login", {
@@ -20,6 +28,9 @@ export const LoginComponent = () => {
     .then((response) => response.json())
     .then((json) => {
       setErrors(json.errors)
+      if(check){
+        localStorage.setItem('user', JSON.stringify(json.data));
+      }
       if(json.meta.ok){
         setUser({ ...user, logged: true });
       }
@@ -39,9 +50,11 @@ export const LoginComponent = () => {
   return (
     <div className="login-page_box">
       <div className="login-page_form">
+      <div className="login-page_img">
+          <img src={logo}></img>
+        </div>
         <form onSubmit={handleSubmit}>
           <p>
-            <label htmlFor="email">Email</label>
             <input
               id="email"
               name="email"
@@ -52,7 +65,6 @@ export const LoginComponent = () => {
             <div className="text-danger">{errors && errors["email"]?.msg}</div>
           </p>
           <p>
-            <label htmlFor="contraseña">Contraseña</label>
             <input
               id="contraseña"
               name="password"
@@ -62,6 +74,13 @@ export const LoginComponent = () => {
             ></input>
             <div className="text-danger">{errors && errors["password"]?.msg}</div>
           </p>
+          <div className="check"> 
+            <input 
+            type="checkbox" 
+            id="check"
+            onChange={handleChangeCheck}></input>
+            <label forHtml="check">Mantener la sesión abierta</label>
+          </div>
           <p>
             <button type="submit">Iniciar sesión</button>
           </p>
