@@ -22,7 +22,8 @@ export const AppProvider = (props) => {
   const [register, setRegister] = useState(false);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState([]);
+  const [categories, setCategories] = [];
 
   return (
     <AppContext.Provider
@@ -40,7 +41,9 @@ export const AppProvider = (props) => {
         newUser,
         setNewUser,
         errors,
-        setErrors
+        setErrors,
+        categories,
+        setCategories,
       }}
     >
       {props.children}
