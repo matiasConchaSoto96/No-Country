@@ -4,7 +4,7 @@ import useForm from "../../Hooks/useForm";
 import logo from '../../resources/ag.png'
 
 export const RegisterComponent = () => {
-  const { newUser, setNewUser, setRegister, errors, setErrors } = useContext(AppContext);
+  const { setRegister, errors, setErrors } = useContext(AppContext);
   const [form, handleChange] = useForm({ email: "", password: "", name: "", lastname: "", rol: 1 });
   const { name, lastname, email, password } = form;
 
@@ -24,7 +24,7 @@ export const RegisterComponent = () => {
       body: JSON.stringify(form),
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
@@ -32,13 +32,12 @@ export const RegisterComponent = () => {
         setErrors(json.errors)
       })
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     addUser();
   };
-
 
   const handlerForm = () => {
     setRegister(false);

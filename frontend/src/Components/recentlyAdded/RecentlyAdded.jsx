@@ -15,7 +15,6 @@ function RecentlyAdded() {
       })
       .then((data) => {
         setProducts(data.data);
-        console.log(products);
       });
   }, []);
 

@@ -56,6 +56,21 @@ module.exports = {
                })
             })
     }, 
+
+    category: function (req, res){
+        db.Category.findAll()
+            .then(categorias =>{
+                return res.status(200).json({
+                    meta:{
+                        status:200,
+                        endpoint:getUrl(req),
+                        total:categorias.length
+                    },
+                    data:categorias
+                })
+            })
+    },
+
     update: (req, res) => {
         const {
             name,

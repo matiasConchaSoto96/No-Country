@@ -6,7 +6,6 @@ import "./card.css";
 import uno from "../../resources/uno.jpeg";
 
 function Card({ id, name, description, price, stock, category }) {
-
   return (
     <div className="card-container">
       <div className="image-container">
@@ -36,9 +35,8 @@ function PopupDelete({ id }) {
   function deleteProduct(id) {
     fetch(`http://localhost:3001/api/delete/${id}`, {
       method: "DELETE",
-    })
-    navigate("/");
-  } 
+    });
+  }
 
   return (
     <Popup
@@ -69,6 +67,7 @@ function PopupDelete({ id }) {
               onClick={() => {
                 deleteProduct(id);
                 close();
+                navigate("/");
               }}
             >
               Eliminar
