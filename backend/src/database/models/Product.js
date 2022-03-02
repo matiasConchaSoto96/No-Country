@@ -23,7 +23,7 @@ module.exports = function(sequelize, dataTypes){
         } ,
         img:{
             type: dataTypes.STRING
-        } ,
+        },
         discount: {
             type:dataTypes.INTEGER
         },
