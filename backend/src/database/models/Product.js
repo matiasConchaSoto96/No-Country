@@ -21,9 +21,9 @@ module.exports = function(sequelize, dataTypes){
         featured:{
             type: dataTypes.INTEGER
         } ,
-        /*img:{
-            type: dataTypes.  ¿que tipo es??
-        } ,*/
+        img:{
+            type: dataTypes.STRING
+        } ,
         discount: {
             type:dataTypes.INTEGER
         },
