@@ -1,40 +1,41 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import useForm from "../../Hooks/useForm";
-import logo from '../../resources/ag.png'
+import logo from "../../resources/ag.png";
 
 export const LoginComponent = () => {
-  const { user, setUser, setRegister, errors, setErrors } = useContext(AppContext);
+  const { user, setUser, setRegister, errors, setErrors } =
+    useContext(AppContext);
   const [form, handleChange] = useForm({ email: "", password: "" });
   const { email, password } = form;
-  const [check, setCheck] = useState(false)
+  const [check, setCheck] = useState(false);
 
   const handleChangeCheck = (e) => {
-      if(e.target.checked){
-        setCheck(true)
-      } else {
-        setCheck(false)
-      }
-  }
+    if (e.target.checked) {
+      setCheck(true);
+    } else {
+      setCheck(false);
+    }
+  };
 
-  function loginUser () {
+  function loginUser() {
     fetch("http://localhost:3001/user/login", {
       body: JSON.stringify(form),
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
-    .then((response) => response.json())
-    .then((json) => {
-      setErrors(json.errors)
-      if(check){
-        localStorage.setItem('user', JSON.stringify(json.data));
-      }
-      if(json.meta.ok){
-        setUser({ ...user, logged: true });
-      }
-    })
+      .then((response) => response.json())
+      .then((json) => {
+        setErrors(json.errors);
+        if (check) {
+          localStorage.setItem("user", JSON.stringify(json.data));
+        }
+        if (json.meta.ok) {
+          setUser({ ...user, logged: true });
+        }
+      });
   }
 
   const handleSubmit = (e) => {
@@ -50,7 +51,7 @@ export const LoginComponent = () => {
   return (
     <div className="login-page_box">
       <div className="login-page_form">
-      <div className="login-page_img">
+        <div className="login-page_img">
           <img src={logo}></img>
         </div>
         <form onSubmit={handleSubmit}>
@@ -72,13 +73,16 @@ export const LoginComponent = () => {
               onChange={handleChange}
               placeholder="Contraseña"
             ></input>
-            <div className="text-danger">{errors && errors["password"]?.msg}</div>
+            <div className="text-danger">
+              {errors && errors["password"]?.msg}
+            </div>
           </p>
-          <div className="check"> 
-            <input 
-            type="checkbox" 
-            id="check"
-            onChange={handleChangeCheck}></input>
+          <div className="check">
+            <input
+              type="checkbox"
+              id="check"
+              onChange={handleChangeCheck}
+            ></input>
             <label forHtml="check">Mantener la sesión abierta</label>
           </div>
           <p>

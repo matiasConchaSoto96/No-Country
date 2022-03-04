@@ -18,6 +18,11 @@
   color: whitesmoke;
 }
 
+.selected-category {
+  background-color: #1ecc97;
+  border: none;
+}
+
 @media screen and (min-width: 321px) and (max-width: 768px) {
   .categories-button {
     width: 250px;

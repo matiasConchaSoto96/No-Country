@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { AppContext } from "../../Context/AppContext";
 import Popup from "reactjs-popup";
 import Counter from "../counter/Counter";
 import "./card.css";
@@ -13,7 +13,7 @@ function Card({ id, name, description, price, stock, category }) {
         <div className="card-buttons-container">
           {/* <button className="card-buttons-delete">B</button> */}
           <PopupDelete id={id} />
-          <button className="card-buttons-edit">E</button>
+          <EditProduct id={id} />
         </div>
       </div>
       <h3>{name}</h3>
@@ -29,14 +29,45 @@ function Card({ id, name, description, price, stock, category }) {
   );
 }
 
-function PopupDelete({ id }) {
-  let navigate = useNavigate();
+function EditProduct({ id }) {
+  const { edit, setEdit, setOpenModal, newProduct, setNewProduct, products } =
+    useContext(AppContext);
 
-  function deleteProduct(id) {
-    fetch(`http://localhost:3001/api/delete/${id}`, {
-      method: "DELETE",
-    });
-  }
+  useEffect(() => {
+    if (edit) {
+      const editProduct = products.find((product) => {
+        return product.id === id;
+      });
+
+      setNewProduct({
+        id: editProduct.id,
+        name: editProduct.name,
+        price: editProduct.price,
+        description: editProduct.description,
+        stock: editProduct.stock,
+        discount: editProduct.discount,
+        id_category: editProduct.id_category,
+        categories: {
+          id: editProduct.categories.id,
+          name: editProduct.categories.name,
+        },
+      });
+
+      setOpenModal(true);
+    }
+  }, [edit]);
+  console.log(newProduct);
+  return (
+    <>
+      <button className="card-buttons-edit" onClick={() => setEdit(true)}>
+        E
+      </button>
+    </>
+  );
+}
+
+function PopupDelete({ id }) {
+  const { deleteProduct } = useContext(AppContext);
 
   return (
     <Popup
@@ -57,7 +88,6 @@ function PopupDelete({ id }) {
               className="popup-btn"
               onClick={() => {
                 close();
-                navigate("/");
               }}
             >
               Cancelar
@@ -67,7 +97,6 @@ function PopupDelete({ id }) {
               onClick={() => {
                 deleteProduct(id);
                 close();
-                navigate("/");
               }}
             >
               Eliminar

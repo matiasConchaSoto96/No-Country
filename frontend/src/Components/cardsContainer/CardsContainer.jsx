@@ -5,24 +5,28 @@ import "./cardsContainer.css";
 import loading from "../../resources/rings.svg";
 
 function CardsContainer() {
-  const { products } = useContext(AppContext);
+  const { products, filter, request, setRequest, fetchAndSetProducts } =
+    useContext(AppContext);
 
-  // useEffect(() => {
-  //   let endpointRequest = `http://localhost:3001/api`;
-  //   fetch(endpointRequest)
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       setProducts(data.data);
-  //       console.log(products);
-  //     });
-  // }, []);
+  useEffect(() => {
+    if (request) {
+      fetchAndSetProducts();
+      setRequest(false);
+    }
+  }, [request]);
+
+  let filterProducts = products.filter((product) => {
+    if (filter === "") {
+      return true;
+    } else {
+      return filter === product.categories.name;
+    }
+  });
 
   return (
     <div className="cards-container">
-      {products.length > 0 ? (
-        products.map((product) => (
+      {filterProducts.length > 0 ? (
+        filterProducts.map((product) => (
           <Card
             key={product.id}
             id={product.id}
@@ -30,7 +34,7 @@ function CardsContainer() {
             description={product.description}
             price={product.price}
             stock={product.stock}
-            category={product.id_category}
+            category={product.categories.name}
           />
         ))
       ) : (
