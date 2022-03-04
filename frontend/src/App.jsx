@@ -9,11 +9,18 @@ function App() {
   const { user, setUser } = useContext(AppContext);
 
   useEffect(() => {
-    const loggedUser = window.localStorage.getItem("user")
-    if(loggedUser){
-        setUser({...user, logged: true, name: loggedUser.name, email: loggedUser.email, password: loggedUser.password, lastname: loggedUser.lastname })
+    const loggedUser = window.localStorage.getItem("user");
+    if (loggedUser) {
+      setUser({
+        ...user,
+        logged: true,
+        name: loggedUser.name,
+        email: loggedUser.email,
+        password: loggedUser.password,
+        lastname: loggedUser.lastname,
+      });
     }
-  }, [])
+  }, []);
 
   return (
     <>

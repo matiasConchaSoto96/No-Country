@@ -7,20 +7,19 @@ import "./categories.css";
 import loading from "../../resources/rings.svg";
 
 function Categories() {
-  const { categories, setCategories } = useContext(AppContext);
+  const { categories, setCategories, setFilter, filter } =
+    useContext(AppContext);
 
-  // useEffect(() => {
-  //   let endpointRequest = `http://localhost:3001/api/categorias`;
-  //   fetch(endpointRequest)
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //       // setCategories(data.data);
-  //       // console.log(Categories);
-  //     });
-  // }, []);
+  useEffect(() => {
+    let endpointRequest = `http://localhost:3001/api/categorias`;
+    fetch(endpointRequest)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setCategories(data.data);
+      });
+  }, []);
 
   const responsive = {
     desktop: {
@@ -40,6 +39,14 @@ function Categories() {
     },
   };
 
+  const classNameGenerator = (name, state) => {
+    let classNames = ["categories-button"];
+    if (name === state) {
+      classNames.push("selected-category");
+    }
+    return classNames.join(" ");
+  };
+
   return (
     <>
       <div className="carousel-container">
@@ -51,21 +58,21 @@ function Categories() {
           infinite={true}
           containerClass="carousel-container"
         >
-          {/* {categories.length > 0 ? (
+          {categories.length > 0 ? (
             categories.map((category) => (
-              <button className="categories-button" id={category.id}>
+              <button
+                className={classNameGenerator(category.name, filter)}
+                id={category.id}
+                key={category.id}
+                onClick={(e) => setFilter(e.target.name)}
+                name={category.name}
+              >
                 {category.name}
               </button>
             ))
           ) : (
             <img src={loading} alt="Loader" className="loader" />
-          )} */}
-          <button className="categories-button">Categoria a</button>
-          <button className="categories-button">Categoria b</button>
-          <button className="categories-button">Categoria c</button>
-          <button className="categories-button">Categoria d</button>
-          <button className="categories-button">Categoria e</button>
-          <button className="categories-button">Categoria f</button>
+          )}
         </Carousel>
       </div>
     </>

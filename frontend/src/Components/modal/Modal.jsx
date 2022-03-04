@@ -4,17 +4,25 @@ import { AppContext } from "../../Context/AppContext";
 import "./modal.css";
 
 const Modal = () => {
-  const { setOpenModal } = useContext(AppContext);
+  const { setOpenModal, newProduct, setNewProduct, edit, setEdit } =
+    useContext(AppContext);
 
-  const handlerClosedModal = () => {
-    setOpenModal(false);
+  const handlerForm = (e) => {
+    setNewProduct({
+      ...newProduct,
+      [e.target.name]: e.target.value,
+    });
   };
+
   return (
     <>
       <section className="products-modal">
         <div className="products-modal-content">
           <div className="btn-modal-close-container">
-            <button className="btn-modal-close" onClick={handlerClosedModal}>
+            <button
+              className="btn-modal-close"
+              onClick={() => setOpenModal(false)}
+            >
               <span>x</span>
             </button>
           </div>
@@ -35,6 +43,8 @@ const Modal = () => {
                 <input
                   className="form-name"
                   name="name"
+                  value={newProduct.name}
+                  onChange={handlerForm}
                   type="text"
                   placeholder="Nombre"
                   required
@@ -55,12 +65,18 @@ const Modal = () => {
               <div className="form-price-discount">
                 <input
                   className="form-price"
+                  name="price"
+                  value={newProduct.price}
+                  onChange={handlerForm}
                   type="number"
                   placeholder="Precio"
                   required
                 />
                 <input
                   className="form-discount"
+                  name="discount"
+                  value={newProduct.discount}
+                  onChange={handlerForm}
                   type="number"
                   placeholder="Descuento"
                   required
@@ -70,6 +86,9 @@ const Modal = () => {
                 <label htmlFor="number-products">Cantidad de productos:</label>
                 <input
                   className="number-products"
+                  name="stock"
+                  value={newProduct.stock}
+                  onChange={handlerForm}
                   id="number-products"
                   type="number"
                   required
@@ -85,7 +104,9 @@ const Modal = () => {
                 <label htmlFor="featured-product">Producto destacado</label>
               </div>
               <textarea
-                name="products-modal-textarea"
+                name="description"
+                value={newProduct.description}
+                onChange={handlerForm}
                 placeholder="Descripción"
                 cols="30"
                 rows="8"
