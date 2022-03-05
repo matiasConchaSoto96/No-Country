@@ -162,6 +162,8 @@
   background-color: rgba(0, 0, 0, 0.51) !important;
 }
 
+/* EditModal */
+
 @media screen and (min-width: 420px) and (max-width: 768px) {
   .card-container {
     width: 350px;

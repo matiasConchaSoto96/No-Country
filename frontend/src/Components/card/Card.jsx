@@ -30,33 +30,42 @@ function Card({ id, name, description, price, stock, category }) {
 }
 
 function EditProduct({ id }) {
-  const { edit, setEdit, setOpenModal, newProduct, setNewProduct, products } =
-    useContext(AppContext);
+  const {
+    edit,
+    setEdit,
+    setOpenModal,
+    newProduct,
+    setNewProduct,
+    products,
+    setProductToEdit,
+  } = useContext(AppContext);
 
   useEffect(() => {
     if (edit) {
-      const editProduct = products.find((product) => {
-        return product.id === id;
-      });
+      // let editProduct = products.find((product) => {
+      //   return product.id === id;
+      // });
 
-      setNewProduct({
-        id: editProduct.id,
-        name: editProduct.name,
-        price: editProduct.price,
-        description: editProduct.description,
-        stock: editProduct.stock,
-        discount: editProduct.discount,
-        id_category: editProduct.id_category,
-        categories: {
-          id: editProduct.categories.id,
-          name: editProduct.categories.name,
-        },
-      });
+      // setNewProduct({
+      //   id: editProduct.id,
+      //   name: editProduct.name,
+      //   price: editProduct.price,
+      //   description: editProduct.description,
+      //   stock: editProduct.stock,
+      //   featured: editProduct.featured,
+      //   discount: editProduct.discount,
+      //   id_category: editProduct.id_category,
+      //   categories: {
+      //     id: editProduct.categories.id,
+      //     name: editProduct.categories.name,
+      //   },
+      // });
 
+      setProductToEdit(id);
       setOpenModal(true);
     }
   }, [edit]);
-  console.log(newProduct);
+
   return (
     <>
       <button className="card-buttons-edit" onClick={() => setEdit(true)}>
@@ -65,6 +74,48 @@ function EditProduct({ id }) {
     </>
   );
 }
+
+// function EditProduct({ id }) {
+//   const { deleteProduct } = useContext(AppContext);
+
+//   return (
+//     <Popup
+//       className="popup-background"
+//       trigger={<button className="card-buttons-delete"> </button>}
+//       modal
+//     >
+//       {(close) => (
+//         <div className="modal-container">
+//           <a className="close" onClick={close}>
+//             &times;
+//           </a>
+//           <div className="popup-text">
+//             ¿Está seguro de que desea editar este producto?
+//           </div>
+//           <div className="popup-btn-container">
+//             <button
+//               className="popup-btn"
+//               onClick={() => {
+//                 close();
+//               }}
+//             >
+//               Cancelar
+//             </button>
+//             <button
+//               className="popup-btn"
+//               onClick={() => {
+//                 deleteProduct(id);
+//                 close();
+//               }}
+//             >
+//               Eliminar
+//             </button>
+//           </div>
+//         </div>
+//       )}
+//     </Popup>
+//   );
+// }
 
 function PopupDelete({ id }) {
   const { deleteProduct } = useContext(AppContext);

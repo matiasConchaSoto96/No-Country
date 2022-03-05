@@ -14,7 +14,7 @@ function RecentlyAdded() {
         return response.json();
       })
       .then((data) => {
-        let recent = data.data.slice(data.data.length - 6, data.data.length);
+        let recent = data.data.slice(data.data.length - 8, data.data.length);
         setRecent(recent);
       });
   }, []);

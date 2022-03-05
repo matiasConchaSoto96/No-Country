@@ -33,8 +33,7 @@ function App() {
         <Route
           exact
           path="/"
-          // element={user.logged ? <Home /> : <Navigate to="/login" />
-          element={<Home />}
+          element={user.logged ? <Home /> : <Navigate to="/login" />}
         />
       </Routes>
     </>

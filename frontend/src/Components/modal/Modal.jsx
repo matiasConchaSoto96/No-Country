@@ -1,17 +1,65 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../Context/AppContext";
-
 import "./modal.css";
 
 const Modal = () => {
-  const { setOpenModal, newProduct, setNewProduct, edit, setEdit } =
-    useContext(AppContext);
+  const {
+    setOpenModal,
+    newProduct,
+    setNewProduct,
+    edit,
+    setEdit,
+    productToEdit,
+    setProductToEdit,
+    products,
+  } = useContext(AppContext);
+
+  useEffect(() => {
+    if (productToEdit) {
+      let editProduct = products.find((product) => {
+        return product.id === productToEdit;
+      });
+
+      setNewProduct({
+        id: editProduct.id,
+        name: editProduct.name,
+        price: editProduct.price,
+        description: editProduct.description,
+        stock: editProduct.stock,
+        featured: editProduct.featured,
+        discount: editProduct.discount,
+        id_category: editProduct.id_category,
+        categories: {
+          id: editProduct.categories.id,
+          name: editProduct.categories.name,
+        },
+      });
+    }
+  }, [edit, productToEdit]);
 
   const handlerForm = (e) => {
     setNewProduct({
       ...newProduct,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handlerSend = () => {
+    setNewProduct({
+      id: "",
+      name: "",
+      price: "",
+      description: "",
+      stock: "",
+      featured: "",
+      discount: "",
+      id_category: "",
+      categories: {
+        id: "",
+        name: "",
+      },
+    });
+    setOpenModal(false);
   };
 
   return (
@@ -97,8 +145,9 @@ const Modal = () => {
               <div className="form-featured-product flex-center">
                 <input
                   id="featured-product"
-                  type="checkbox"
-                  value={true}
+                  type="number"
+                  value={newProduct.featured}
+                  onChange={handlerForm}
                   required
                 />
                 <label htmlFor="featured-product">Producto destacado</label>
@@ -116,6 +165,7 @@ const Modal = () => {
                 className="products-modal-button"
                 type="button"
                 value="Enviar"
+                onClick={handlerSend}
               />
             </form>
           </article>

@@ -27,12 +27,14 @@ export const AppProvider = (props) => {
   const [filter, setFilter] = useState("");
   const [recent, setRecent] = useState([]);
   const [request, setRequest] = useState(true);
+  const [productToEdit, setProductToEdit] = useState("");
   const [newProduct, setNewProduct] = useState({
     id: "",
     name: "",
     price: "",
     description: "",
     stock: "",
+    featured: "",
     discount: "",
     id_category: "",
     categories: {
@@ -93,6 +95,8 @@ export const AppProvider = (props) => {
         setNewProduct,
         edit,
         setEdit,
+        productToEdit,
+        setProductToEdit,
       }}
     >
       {props.children}
