@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
+import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 import Counter from "../counter/Counter";
 import "./card.css";
@@ -30,92 +31,48 @@ function Card({ id, name, description, price, stock, category }) {
 }
 
 function EditProduct({ id }) {
-  const {
-    edit,
-    setEdit,
-    setOpenModal,
-    newProduct,
-    setNewProduct,
-    products,
-    setProductToEdit,
-  } = useContext(AppContext);
-
-  useEffect(() => {
-    if (edit) {
-      // let editProduct = products.find((product) => {
-      //   return product.id === id;
-      // });
-
-      // setNewProduct({
-      //   id: editProduct.id,
-      //   name: editProduct.name,
-      //   price: editProduct.price,
-      //   description: editProduct.description,
-      //   stock: editProduct.stock,
-      //   featured: editProduct.featured,
-      //   discount: editProduct.discount,
-      //   id_category: editProduct.id_category,
-      //   categories: {
-      //     id: editProduct.categories.id,
-      //     name: editProduct.categories.name,
-      //   },
-      // });
-
-      setProductToEdit(id);
-      setOpenModal(true);
-    }
-  }, [edit]);
+  const { setIdToEdit } = useContext(AppContext);
+  let navigate = useNavigate();
 
   return (
-    <>
-      <button className="card-buttons-edit" onClick={() => setEdit(true)}>
-        E
-      </button>
-    </>
+    <Popup
+      className="popup-background"
+      trigger={<button className="card-buttons-delete"> E </button>}
+      modal
+    >
+      {(close) => (
+        <div className="modal-container">
+          <a className="close" onClick={close}>
+            &times;
+          </a>
+          <div className="popup-text">
+            ¿Está seguro de que desea editar este producto?
+          </div>
+          <div className="popup-btn-container">
+            <button
+              className="popup-btn"
+              onClick={() => {
+                close();
+              }}
+            >
+              Cancelar
+            </button>
+            <button
+              className="popup-btn"
+              onClick={() => {
+                setIdToEdit(id);
+                close();
+                navigate("/editproduct");
+              }}
+            >
+              editar
+            </button>
+          </div>
+        </div>
+      )}
+    </Popup>
   );
 }
-
-// function EditProduct({ id }) {
-//   const { deleteProduct } = useContext(AppContext);
-
-//   return (
-//     <Popup
-//       className="popup-background"
-//       trigger={<button className="card-buttons-delete"> </button>}
-//       modal
-//     >
-//       {(close) => (
-//         <div className="modal-container">
-//           <a className="close" onClick={close}>
-//             &times;
-//           </a>
-//           <div className="popup-text">
-//             ¿Está seguro de que desea editar este producto?
-//           </div>
-//           <div className="popup-btn-container">
-//             <button
-//               className="popup-btn"
-//               onClick={() => {
-//                 close();
-//               }}
-//             >
-//               Cancelar
-//             </button>
-//             <button
-//               className="popup-btn"
-//               onClick={() => {
-//                 deleteProduct(id);
-//                 close();
-//               }}
-//             >
-//               Eliminar
-//             </button>
-//           </div>
-//         </div>
-//       )}
-//     </Popup>
-//   );
-// }
 
 function PopupDelete({ id }) {
   const { deleteProduct } = useContext(AppContext);

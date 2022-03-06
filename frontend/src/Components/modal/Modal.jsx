@@ -1,41 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
 import "./modal.css";
 
 const Modal = () => {
-  const {
-    setOpenModal,
-    newProduct,
-    setNewProduct,
-    edit,
-    setEdit,
-    productToEdit,
-    setProductToEdit,
-    products,
-  } = useContext(AppContext);
-
-  useEffect(() => {
-    if (productToEdit) {
-      let editProduct = products.find((product) => {
-        return product.id === productToEdit;
-      });
-
-      setNewProduct({
-        id: editProduct.id,
-        name: editProduct.name,
-        price: editProduct.price,
-        description: editProduct.description,
-        stock: editProduct.stock,
-        featured: editProduct.featured,
-        discount: editProduct.discount,
-        id_category: editProduct.id_category,
-        categories: {
-          id: editProduct.categories.id,
-          name: editProduct.categories.name,
-        },
-      });
-    }
-  }, [edit, productToEdit]);
+  const { setOpenModal, newProduct, setNewProduct } = useContext(AppContext);
 
   const handlerForm = (e) => {
     setNewProduct({
@@ -97,7 +65,7 @@ const Modal = () => {
                   placeholder="Nombre"
                   required
                 />
-                <select className="category-select" name="category-select">
+                {/* <select className="category-select" name="category-select">
                   <option selected>Elija una opción</option>
                   <option className="new-category">
                     Agregar nueva categoría
@@ -108,7 +76,7 @@ const Modal = () => {
                   name="category-input"
                   type="text"
                   placeholder="Categoría"
-                />
+                /> */}
               </div>
               <div className="form-price-discount">
                 <input
@@ -131,7 +99,7 @@ const Modal = () => {
                 />
               </div>
               <div className="form-number-products flex-right">
-                <label htmlFor="number-products">Cantidad de productos:</label>
+                <label>Cantidad de productos:</label>
                 <input
                   className="number-products"
                   name="stock"
