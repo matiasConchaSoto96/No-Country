@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator')
 const db = require('../database/models')
 const Op = db.Sequelize.Op;
 
@@ -7,36 +8,61 @@ const getUrl = (req) => {
 
 module.exports = {
     store:(req,res)=>{
-        const {
-            name,
-            price,
-            description,
-            stock,
-            featured,
-            discount,
-            id_category 
-        } = req.body
-        db.Product
-        .create({
-            name,
-            price,
-            description,
-            stock,
-            featured,
-            discount,
-            id_category 
-        })
-        
-        .then(productos => {
-            return res.status(200).json({
-                meta:{
-                    status:200, 
-                    endpoint: getUrl(req),
-                    msg: "Producto creado con éxito"
-                },
-                data:productos,
+        let errors = validationResult(req);
+        if (req.fileValidatorError) {
+            let image = {
+                param: "images",
+                msg: req.fileValidatorError,
+            };
+        errors.push(image);
+        }
+
+        if (!errors.isEmpty()) {
+
+            let arrayImages;
+            if (req.files) {
+              req.files.forEach((image) => {
+                arrayImages = image.filename
+              });
+            }else{
+                arrayImages = "default-img.gif"
+            }
+
+            const {
+                name,
+                price,
+                description,
+                stock,
+                featured,
+                discount,
+                id_category,
+            } = req.body
+
+            db.Product
+            .create({
+                name,
+                price,
+                description,
+                stock,
+                featured,
+                discount,
+                id_category,
+                img: arrayImages, 
             })
-        })
+            
+            .then(productos => {
+                return res.status(200).json({
+                    meta:{
+                        status:200, 
+                        endpoint: getUrl(req),
+                        msg: "Producto creado con éxito"
+                    },
+                    data:productos,
+                })
+            })
+        
+        
+        }
     },
 
     list: function (req,res){
@@ -56,21 +82,6 @@ module.exports = {
                })
             })
     }, 
-
-    category: function (req, res){
-        db.Category.findAll()
-            .then(categorias =>{
-                return res.status(200).json({
-                    meta:{
-                        status:200,
-                        endpoint:getUrl(req),
-                        total:categorias.length
-                    },
-                    data:categorias
-                })
-            })
-    },
-
     update: (req, res) => {
         const {
             name,
@@ -167,24 +178,21 @@ module.exports = {
         }
     },
 
-    getCategories: (req, res) => {
-        db.Category.findAll({
-            include: [
-                {association: "products"},
-             ]
-        })
-            .then(categories => {
-               return res.status(200).json({
-                meta:{
-                    status:200, 
-                    endpoint: getUrl(req),
-                    total: categories.length
-                }, 
-                   data: categories
-               })
+    category: function (req, res){
+        db.Category.findAll()
+            .then(categorias =>{
+                return res.status(200).json({
+                    meta:{
+                        status:200,
+                        endpoint:getUrl(req),
+                        total:categorias.length
+                    },
+                    data:categorias
+                })
             })
     },
-    postCategories: (req, res) => {
+
+    getCategory: (req, res) => {
         if(req.params.id % 1 !== 0 || req.params.id < 0){
             return res.status(404).json({
                 meta: {
@@ -218,5 +226,26 @@ module.exports = {
             })
             .catch(error => console.log(error))
         }
+    },
+    addCategory: (req, res) => {
+        const {
+            name,
+        } = req.body
+
+        db.Category
+        .create({
+            name,
+        })
+        
+        .then(category => {
+            return res.status(200).json({
+                meta:{
+                    status:200, 
+                    endpoint: getUrl(req),
+                    msg: "categoria creada con éxito"
+                },
+                data:category,
+            })
+        })
     }
 }

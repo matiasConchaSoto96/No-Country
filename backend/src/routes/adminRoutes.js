@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+let uploadProductFile = require('../middlewares/uploadProductsFiles')
 var productsController = require("../controllers/productsController");
 
 /* CRUD */
@@ -9,7 +10,7 @@ router.get("/", productsController.list)
 router.get("/categorias", productsController.category)
 
 // Metodo Post para crear - Joaquin
-router.post("/", productsController.store);
+router.post("/", uploadProductFile.array("images"), productsController.store);
 
 // Metodo Put para editar el producto - Yonatan
 router.put("/update/:id", productsController.update)
@@ -23,8 +24,8 @@ router.get("/:id", productsController.getOne)
 
 
 // Metodo Post para crear - Joaquin
-router.get("/categories", productsController.getCategories);
 
-router.get("/categories/:id", productsController.postCategories);
+router.get("/categorias/:id", productsController.getCategory);
+router.post("/categorias/", productsController.addCategory);
 
 module.exports = router;
