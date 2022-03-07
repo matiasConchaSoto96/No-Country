@@ -5,6 +5,21 @@ export const AppContext = createContext();
 
 export const AppProvider = (props) => {
   const [products, setProducts] = useState([]);
+  const [newProduct, setNewProduct] = useState({
+    id: "",
+    name: "",
+    price: "",
+    description: "",
+    stock: "",
+    featured: "",
+    discount: "",
+    id_category: "",
+    categories: {
+      id: "",
+      name: "",
+    },
+  });
+
   const [user, setUser] = useState({
     name: "",
     lastname: "",
@@ -27,8 +42,8 @@ export const AppProvider = (props) => {
   const [filter, setFilter] = useState("");
   const [recent, setRecent] = useState([]);
   const [request, setRequest] = useState(true);
-  const [productToEdit, setProductToEdit] = useState("");
-  const [newProduct, setNewProduct] = useState({
+  const [idToEdit, setIdToEdit] = useState("");
+  const [productToEdit, setProductToEdit] = useState({
     id: "",
     name: "",
     price: "",
@@ -42,8 +57,8 @@ export const AppProvider = (props) => {
       name: "",
     },
   });
-  const [edit, setEdit] = useState(false);
 
+  // Get and setProducts
   const fetchAndSetProducts = () => {
     let endpointRequest = `http://localhost:3001/api`;
 
@@ -56,8 +71,38 @@ export const AppProvider = (props) => {
       });
   };
 
+  // Put method
+  const editProduct = (editedProduct, id) => {
+    // let endpointRequest = `http://localhost:3001/api`;
+
+    // fetch(`${endpointRequest}/${id}`, {
+    //   method: "PUT",
+    //   body: JSON.stringify(editedProduct),
+    //   headers: {
+    //     "Content-type": "application/json; charset=UTF-8",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((json) => console.log(json));
+
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(editedProduct),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }).then((response) => {
+      console.log(response);
+    });
+
+    setRequest(true);
+  };
+
+  // Delete method
   const deleteProduct = (id) => {
-    fetch(`http://localhost:3001/api/delete/${id}`, {
+    let endpointRequest = `http://localhost:3001/api/delete/`;
+
+    fetch(`${endpointRequest}${id}`, {
       method: "DELETE",
     });
 
@@ -91,12 +136,13 @@ export const AppProvider = (props) => {
         deleteProduct,
         request,
         setRequest,
-        newProduct,
-        setNewProduct,
-        edit,
-        setEdit,
         productToEdit,
         setProductToEdit,
+        idToEdit,
+        setIdToEdit,
+        newProduct,
+        setNewProduct,
+        editProduct,
       }}
     >
       {props.children}

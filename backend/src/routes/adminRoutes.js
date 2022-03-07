@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
-let uploadProductFile = require('../middlewares/uploadProductsFiles')
 var productsController = require("../controllers/productsController");
+const upload = require('../middlewares/multerProducts')
+
+
+
 
 /* CRUD */
 // Metodo Get para traer el listado de los productos - Joaquin
@@ -10,7 +13,7 @@ router.get("/", productsController.list)
 router.get("/categorias", productsController.category)
 
 // Metodo Post para crear - Joaquin
-router.post("/", uploadProductFile.array("images"), productsController.store);
+router.post("/", upload.single('img') ,productsController.store);//chequear nombre del input 
 
 // Metodo Put para editar el producto - Yonatan
 router.put("/update/:id", productsController.update)
