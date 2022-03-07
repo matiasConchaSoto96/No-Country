@@ -1,34 +1,17 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
+import useForm from '../../Hooks/useForm'
 import "./modal.css";
 
 const Modal = () => {
-  const { setOpenModal, newProduct, setNewProduct } = useContext(AppContext);
+  const { setOpenModal, categories, createProduct } = useContext(AppContext);
+  const [form, handleChange] = useForm({ name: "", image: "", price: 0, discount: 0, featured: 0, stock: 0, description: "", id_category: 0});
+  const { name, image, price, discount, featured, stock, description, id_category } = form;
 
-  const handlerForm = (e) => {
-    setNewProduct({
-      ...newProduct,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handlerSend = () => {
-    setNewProduct({
-      id: "",
-      name: "",
-      price: "",
-      description: "",
-      stock: "",
-      featured: "",
-      discount: "",
-      id_category: "",
-      categories: {
-        id: "",
-        name: "",
-      },
-    });
-    setOpenModal(false);
-  };
+  const handlerSubmit = (e) => {
+    e.preventDefault()
+    createProduct(form)
+  }
 
   return (
     <>
@@ -43,47 +26,62 @@ const Modal = () => {
             </button>
           </div>
           <article className="products-modal-article">
+
+            <form className="products-modal-form" method="post" encType="multipart/form-data">
+
             <div className="products-modal-img-container">
               <label htmlFor="file">Agrega una imagen:</label>
               <br />
               <input
                 className="products-modal-file"
                 id="file"
-                name="file"
+                name="image"
+                value={image}
+                onChange={handleChange}
                 type="file"
                 required
               />
             </div>
-            <form className="products-modal-form" method="post">
+
               <div className="form-name-category">
                 <input
                   className="form-name"
                   name="name"
-                  value={newProduct.name}
-                  onChange={handlerForm}
+                  value={name}
+                  onChange={handleChange}
                   type="text"
                   placeholder="Nombre"
                   required
                 />
-                {/* <select className="category-select" name="category-select">
-                  <option selected>Elija una opción</option>
-                  <option className="new-category">
-                    Agregar nueva categoría
-                  </option>
-                </select>
-                <input
-                  className="category-input none"
-                  name="category-input"
-                  type="text"
-                  placeholder="Categoría"
-                /> */}
+                <div className="form-featured-product flex-center">
+                <select 
+                value={id_category} 
+                onChange={handleChange} 
+                id="category" 
+                className="form-control" 
+                name="id_category" >
+                    <option>Categorias</option>
+                    {categories.length > 0
+                    ? categories.map((category) => (
+                        <option
+                          key={category.id}
+                          value={category.id}
+                          id={category.id}
+                        >
+                          {category.name}
+                        </option>
+                      ))
+                    : null}
+                  </select>
+                </div>
+                
               </div>
               <div className="form-price-discount">
                 <input
                   className="form-price"
                   name="price"
-                  value={newProduct.price}
-                  onChange={handlerForm}
+                  value={price}
+                  onChange={handleChange}
                   type="number"
                   placeholder="Precio"
                   required
@@ -91,8 +89,8 @@ const Modal = () => {
                 <input
                   className="form-discount"
                   name="discount"
-                  value={newProduct.discount}
-                  onChange={handlerForm}
+                  value={discount}
+                  onChange={handleChange}
                   type="number"
                   placeholder="Descuento"
                   required
@@ -103,27 +101,30 @@ const Modal = () => {
                 <input
                   className="number-products"
                   name="stock"
-                  value={newProduct.stock}
-                  onChange={handlerForm}
+                  value={stock}
+                  onChange={handleChange}
                   id="number-products"
                   type="number"
                   required
                 />
               </div>
               <div className="form-featured-product flex-center">
-                <input
-                  id="featured-product"
-                  type="number"
-                  value={newProduct.featured}
-                  onChange={handlerForm}
-                  required
-                />
-                <label htmlFor="featured-product">Producto destacado</label>
+              <select 
+              value={featured} 
+              onChange={handleChange} 
+              id="featured" 
+              className="form-control" 
+              name="featured" >
+                  <option value="0">Destacar</option>
+                  <option value="1">Si</option>
+                  <option value="0">No</option>
+                </select>
               </div>
+
               <textarea
                 name="description"
-                value={newProduct.description}
-                onChange={handlerForm}
+                value={description}
+                onChange={handleChange}
                 placeholder="Descripción"
                 cols="30"
                 rows="8"
@@ -133,7 +134,7 @@ const Modal = () => {
                 className="products-modal-button"
                 type="button"
                 value="Enviar"
-                onClick={handlerSend}
+                onClick={handlerSubmit}
               />
             </form>
           </article>

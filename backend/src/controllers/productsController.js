@@ -11,13 +11,13 @@ module.exports = {
         let errors = validationResult(req);
         if (req.fileValidatorError) {
             let image = {
-                param: "images",
+                param: "image",
                 msg: req.fileValidatorError,
             };
         errors.push(image);
         }
 
-        if (!errors.isEmpty()) {
+        if (errors.isEmpty()) {
 
             let arrayImages;
             if (req.files) {
@@ -47,7 +47,7 @@ module.exports = {
                 featured,
                 discount,
                 id_category,
-                img: arrayImages, 
+                image: arrayImages, 
             })
             
             .then(productos => {

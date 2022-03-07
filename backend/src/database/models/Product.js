@@ -8,20 +8,20 @@ module.exports = function(sequelize, dataTypes){
         },
         name:{
             type: dataTypes.STRING
-        } ,
+        },
         price:{
             type: dataTypes.INTEGER
-        } ,
+        },
         description:{
             type: dataTypes.STRING
-        } ,
+        },
         stock:{
             type: dataTypes.INTEGER
-        } ,
+        },
         featured:{
             type: dataTypes.INTEGER
-        } ,
-        img:{
+        },
+        image:{
             type: dataTypes.STRING
         },
         discount: {

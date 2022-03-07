@@ -13,7 +13,7 @@ router.get("/", productsController.list)
 router.get("/categorias", productsController.category)
 
 // Metodo Post para crear - Joaquin
-router.post("/", upload.single('img') ,productsController.store);//chequear nombre del input 
+router.post("/", upload.array('image') ,productsController.store);//chequear nombre del input 
 
 // Metodo Put para editar el producto - Yonatan
 router.put("/update/:id", productsController.update)

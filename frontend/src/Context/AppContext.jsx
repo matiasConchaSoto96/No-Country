@@ -5,20 +5,7 @@ export const AppContext = createContext();
 
 export const AppProvider = (props) => {
   const [products, setProducts] = useState([]);
-  const [newProduct, setNewProduct] = useState({
-    id: "",
-    name: "",
-    price: "",
-    description: "",
-    stock: "",
-    featured: "",
-    discount: "",
-    id_category: "",
-    categories: {
-      id: "",
-      name: "",
-    },
-  });
+  const [newProduct, setNewProduct] = useState([]);
 
   const [user, setUser] = useState({
     name: "",
@@ -70,6 +57,22 @@ export const AppProvider = (props) => {
         setProducts(data.data);
       });
   };
+
+  const createProduct = (newProduct) => {
+    let endpointRequest = `http://localhost:3001/api/`;
+    
+    fetch(`${endpointRequest}`, {
+      method: "POST",
+      body: JSON.stringify(newProduct),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json))
+      
+      setRequest(true);
+  }
 
   // Put method
   const editProduct = (editedProduct, id) => {
@@ -143,6 +146,7 @@ export const AppProvider = (props) => {
         newProduct,
         setNewProduct,
         editProduct,
+        createProduct
       }}
     >
       {props.children}
