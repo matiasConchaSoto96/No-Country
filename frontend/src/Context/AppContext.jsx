@@ -71,9 +71,38 @@ export const AppProvider = (props) => {
       });
   };
 
+  // Put method
+  const editProduct = (editedProduct, id) => {
+    // let endpointRequest = `http://localhost:3001/api`;
+
+    // fetch(`${endpointRequest}/${id}`, {
+    //   method: "PUT",
+    //   body: JSON.stringify(editedProduct),
+    //   headers: {
+    //     "Content-type": "application/json; charset=UTF-8",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((json) => console.log(json));
+
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(editedProduct),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }).then((response) => {
+      console.log(response);
+    });
+
+    setRequest(true);
+  };
+
   // Delete method
   const deleteProduct = (id) => {
-    fetch(`http://localhost:3001/api/delete/${id}`, {
+    let endpointRequest = `http://localhost:3001/api/delete/`;
+
+    fetch(`${endpointRequest}${id}`, {
       method: "DELETE",
     });
 
@@ -113,6 +142,7 @@ export const AppProvider = (props) => {
         setIdToEdit,
         newProduct,
         setNewProduct,
+        editProduct,
       }}
     >
       {props.children}
