@@ -23,9 +23,13 @@
   color: #fff;
 }
 
-.user-display small { color: #fff; }
+.user-display small {
+  color: #fff;
+}
 
-.user-display .user-nickname { font-size: 1rem; }
+.user-display .user-nickname {
+  font-size: 1rem;
+}
 
 /**** Configuración del user editable y sus elementos internos ****/
 .user-editable {
@@ -36,18 +40,23 @@
   width: 100%;
 }
 
-.user-editable p { margin-bottom: 1rem; }
- 
-
-/* User info */
-.user-info { width: 100%; }
-
-.user-info div{ 
-  width: 100%;
-  margin-bottom: 1rem; 
+.user-editable p {
+  margin-bottom: 1rem;
 }
 
-.user-info div small{ margin-bottom: 1.5rem; }
+/* User info */
+.user-info {
+  width: 100%;
+}
+
+.user-info div {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.user-info div small {
+  margin-bottom: 1.5rem;
+}
 
 .user-info div p {
   width: 100%;
@@ -74,9 +83,13 @@
   color: #fff;
 }
 
-.user-edit small { color: #fff; }
+.user-edit small {
+  color: #fff;
+}
 
-.user-edit .user-nickname { font-size: 1rem; }
+.user-edit .user-nickname {
+  font-size: 1rem;
+}
 
 /**** Configuración del user editable y sus elementos internos ****/
 .user-editable {
@@ -87,32 +100,38 @@
   width: 100%;
 }
 
-.user-editable p { margin-bottom: 1rem; }
+.user-editable p {
+  margin-bottom: 1rem;
+}
 
 /* btn editable */
 .btn-editable-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 5px;
+  gap: 3px;
   width: 80px;
   height: 32px;
-  border: thin solid #274E64;
+  border: thin solid #274e64;
   border-radius: 10px;
   background-color: #03314b;
   cursor: pointer;
 }
 
-.btn-editable-container p { margin: 0; }
+.btn-editable-container p {
+  margin: 0;
+}
 
-.btn-editable-container .pencil-svg { height: 33px; }
+.btn-editable-container .pencil-svg {
+  height: 34px;
+}
 
 .btn-editable-container hr {
   width: 1px;
   height: 100%;
   margin: 0;
   border: 0;
-  background-color: #274E64;
+  background-color: #274e64;
 }
 
 .btn-editable-container small {
@@ -120,30 +139,36 @@
   margin-bottom: auto;
 }
 
-.btn-editable-container .align-self { align-self: flex-end; }
+.btn-editable-container .align-self {
+  align-self: flex-end;
+}
 
 /* User form */
-.user-edit-form { width: 100%; }
+.user-edit-form {
+  width: 100%;
+}
 
-.user-edit-form div { 
+.user-edit-form div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 0.5rem;
-  margin-bottom: 2rem; 
+  margin-bottom: 2rem;
 }
 
-.user-edit-form div label { 
+.user-edit-form div label {
   font-size: smaller;
-  color: #fff; 
+  color: #fff;
 }
 
-.user-edit-form .uef-password-container { 
+.user-edit-form .uef-password-container {
   flex-direction: row;
-  margin-bottom: 0; 
+  margin-bottom: 0;
 }
 
-.uef-password-container div { width: 45%; }
+.uef-password-container div {
+  width: 45%;
+}
 
 .user-edit-form .uef-show-password {
   flex-direction: row;
@@ -154,7 +179,7 @@
 .user-edit-form div input[type="text"],
 .user-edit-form div input[type="email"],
 .user-edit-form div input[type="password"] {
-  padding: .5rem;
+  padding: 0.5rem;
   font-size: 1.3rem;
   border: 0;
   border-bottom: thin solid #1ecc97;
@@ -171,12 +196,12 @@
 
 .user-edit-form input[type="checkbox"] + label::before {
   content: "";
-	width: 1.2rem;
-	height: 1.2rem;
-	float: left;
-	margin: 0.7rem 0.5rem 0 0;
-	border: 2px solid #ccc;
-	background: #fff;
+  width: 1.2rem;
+  height: 1.2rem;
+  float: left;
+  margin: 0.7rem 0.5rem 0 0;
+  border: 2px solid #ccc;
+  background: #fff;
   /* border: thin solid #1ecc97;
   color: #1ecc97;
   outline: none; */
@@ -189,7 +214,7 @@
 .user-edit-form input[type="checkbox"]:checked + label::after {
   content: "";
   width: 1rem;
-  height: .5rem;
+  height: 0.5rem;
   border: 4px solid #0fbf12;
   float: left;
   margin-left: -1.6rem;
@@ -200,7 +225,7 @@
 }
 
 .user-edit-form input[type="checkbox"] {
-	display: none;
+  display: none;
 }
 
 .user-edit-form input[type="checkbox"] + label {
@@ -224,7 +249,7 @@
 
 .user-edit-form input[type="button"] {
   width: 45%;
-  padding: .5rem;
+  padding: 0.5rem;
   font-size: 1rem;
   color: #fff;
   border: none;
