@@ -28,7 +28,7 @@ function Header() {
           <a href="#" onClick={handlerAdd}>
             Agregar Producto
           </a>
-          <a href="#">Configuración</a>
+          <Link to="/settings">Configuración</Link>
           <a href="#" onClick={handlerLoginOut}>
             Cerrar Sesión
           </a>

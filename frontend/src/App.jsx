@@ -5,6 +5,7 @@ import Home from "./Pages/home/Home";
 import Products from "./Pages/products/Products";
 import Edit from "./Pages/edit/Edit";
 import { Login } from "./Pages/login/Login";
+import Settings from "./Pages/settings/Settings";
 
 function App() {
   const { user, setUser } = useContext(AppContext);
@@ -37,6 +38,7 @@ function App() {
         />
         <Route path="/products" element={<Products />} />
         <Route path="/editproduct" element={<Edit />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </>
   );

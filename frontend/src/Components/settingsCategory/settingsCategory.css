@@ -1,0 +1,64 @@
+/* Estilos principales */
+.categories-container p { margin: 0; }
+
+/* Estilos del contenedor principal settings-category */
+.settings-category {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos del categories-container */
+.categories-container {
+  display: flex;
+  justify-content: flex-start;
+  align-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  max-width: 300px;
+  margin-bottom: 3rem;
+}
+
+.categories-container p {
+  padding: 0.5rem;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: #1ecc97;
+}
+
+/* Estilos de settings-category-form*/
+.settings-category-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.settings-category-form .new-category {
+  width: 80%;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+  color: #fff;
+  border: 0;
+  border-bottom: thin solid #1ecc97;
+  background-color: #03314b;
+  caret-color: #fff;
+  outline: none;
+}
+
+.settings-category-form .new-category::placeholder { 
+  text-align: center;
+  color: #fff; 
+}
+
+.settings-category-form .btn-category {
+  width: 45%;
+  padding: .5rem;
+  font-size: 1rem;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  background-color: #1ecc97;
+  cursor: pointer;
+  outline: none;
+}
