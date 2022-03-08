@@ -1,10 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../Context/AppContext";
-
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./categories.css";
-import loading from "../../resources/rings.svg";
 
 function Categories() {
   const { categories, setCategories, setFilter, filter } =
@@ -71,7 +69,9 @@ function Categories() {
               </button>
             ))
           ) : (
-            <img src={loading} alt="Loader" className="loader" />
+            <div className="loading-categories">
+              <div>Cargando Categorias...</div>
+            </div>
           )}
         </Carousel>
       </div>

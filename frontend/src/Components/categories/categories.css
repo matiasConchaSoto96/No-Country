@@ -1,6 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@800&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .carousel-container {
   height: 150px;
-  /* background-color: rgba(3, 49, 75, 1); */
 }
 
 .categories-button {
@@ -13,8 +20,8 @@
   background-color: rgba(3, 49, 75, 1);
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 17px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 20px;
   color: whitesmoke;
   cursor: pointer;
 }
@@ -24,11 +31,21 @@
   border: none;
 }
 
+.loading-categories {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  font-size: 20px;
+}
+
 @media screen and (min-width: 321px) and (max-width: 768px) {
   .categories-button {
-    width: 250px;
+    width: 260px;
     height: 80px;
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
