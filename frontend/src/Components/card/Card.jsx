@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
-import Counter from "../counter/Counter";
 import "./card.css";
 import uno from "../../resources/uno.jpeg";
 
@@ -11,20 +10,18 @@ function Card({ id, name, description, price, stock, category }) {
     <div className="card-container">
       <div className="image-container">
         <img className="card-image" src={uno} alt="img" />
-        <div className="card-buttons-container">
-          {/* <button className="card-buttons-delete">B</button> */}
-          <PopupDelete id={id} />
-          <EditProduct id={id} />
-        </div>
       </div>
+
       <h3>{name}</h3>
-      <p>
-        {description}
-        {category}
-      </p>
+      <p>{description}</p>
+      <span className="container-data category">Categoria: {category}</span>
       <div>
         <div className="card-price">{price}</div>
-        <Counter stock={stock} id={id} />
+        <div className="container-data">Stock: {stock}</div>
+      </div>
+      <div className="buttons-container">
+        <PopupDelete id={id} />
+        <EditProduct id={id} />
       </div>
     </div>
   );
@@ -37,7 +34,7 @@ function EditProduct({ id }) {
   return (
     <Popup
       className="popup-background"
-      trigger={<button className="card-buttons-delete"> E </button>}
+      trigger={<button className="card-buttons"> Editar </button>}
       modal
     >
       {(close) => (
@@ -80,7 +77,7 @@ function PopupDelete({ id }) {
   return (
     <Popup
       className="popup-background"
-      trigger={<button className="card-buttons-delete"> B </button>}
+      trigger={<button className="card-buttons"> Eliminar </button>}
       modal
     >
       {(close) => (

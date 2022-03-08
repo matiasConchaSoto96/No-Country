@@ -16,6 +16,7 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 17px;
   color: whitesmoke;
+  cursor: pointer;
 }
 
 .selected-category {

@@ -30,7 +30,7 @@ function RecentlyAdded() {
             description={product.description}
             price={product.price}
             stock={product.stock}
-            category={product.id_category}
+            category={product.categories.name}
           />
         ))
       ) : (
