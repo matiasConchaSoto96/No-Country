@@ -11,6 +11,7 @@ const Modal = () => {
   const handlerSubmit = (e) => {
     e.preventDefault()
     createProduct(form)
+    
   }
 
   return (

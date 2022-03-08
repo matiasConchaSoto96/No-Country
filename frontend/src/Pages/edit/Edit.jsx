@@ -29,11 +29,7 @@ function Edit() {
         stock: editProduct.stock,
         featured: editProduct.featured,
         discount: editProduct.discount,
-        id_category: editProduct.id_category,
-        categories: {
-          id: editProduct.categories.id,
-          name: editProduct.categories.name,
-        },
+        id_category: editProduct.id_category
       });
     }
   }, []);
@@ -45,21 +41,12 @@ function Edit() {
     });
   };
 
-  const handlerCategory = (e) => {
-    setProductToEdit({
-      ...productToEdit,
-      id_category: e.target.id,
-      categories: { id: e.target.id, [e.target.name]: e.target.value },
-    });
-  };
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    editProduct(productToEdit, idToEdit);
+    editProduct(productToEdit);
     navigate("/products");
   };
-
-  console.log(productToEdit);
 
   return (
     <div className="edit-page">
@@ -102,25 +89,25 @@ function Edit() {
             onChange={handlerEdit}
           ></textarea>
 
-          <select
-            name="categories.name"
-            id={productToEdit.categories.id}
-            value={productToEdit.categories.name}
-            onClick={handlerCategory}
-            // onChange={handlerEdit}
-          >
-            {categories.length > 0
-              ? categories.map((category) => (
-                  <option
-                    key={category.id}
-                    value={category.name}
-                    id={category.id}
-                  >
-                    {category.name}
-                  </option>
-                ))
-              : null}
-          </select>
+            <select 
+                value={productToEdit.id_category} 
+                onChange={handlerEdit} 
+                id="category" 
+                className="form-control" 
+                name="id_category" >
+                    <option>Categorias</option>
+                    {categories.length > 0
+                    ? categories.map((category) => (
+                        <option
+                          key={category.id}
+                          value={category.id}
+                          id={category.id}
+                        >
+                          {category.name}
+                        </option>
+                      ))
+                    : null}
+                  </select>
           <div className="edit-form-buttons-container">
             <button
               className="edit-form-button"

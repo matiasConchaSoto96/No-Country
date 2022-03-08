@@ -75,28 +75,20 @@ export const AppProvider = (props) => {
   }
 
   // Put method
-  const editProduct = (editedProduct, id) => {
-    // let endpointRequest = `http://localhost:3001/api`;
+  const editProduct = (editedProduct) => {
+    let endpointRequest = `http://localhost:3001/api/update`;
+    console.log(editedProduct)
 
-    // fetch(`${endpointRequest}/${id}`, {
-    //   method: "PUT",
-    //   body: JSON.stringify(editedProduct),
-    //   headers: {
-    //     "Content-type": "application/json; charset=UTF-8",
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((json) => console.log(json));
-
-    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    fetch(`${endpointRequest}/${productToEdit.id}`, {
       method: "PUT",
       body: JSON.stringify(editedProduct),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then((response) => {
-      console.log(response);
-    });
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
+
 
     setRequest(true);
   };
