@@ -38,7 +38,9 @@ function CardsContainer() {
           />
         ))
       ) : (
-        <img src={loading} alt="Loader" className="loader" />
+        <div className="loading-container">
+          <img src={loading} alt="Loader" className="loader" />
+        </div>
       )}
     </div>
   );
