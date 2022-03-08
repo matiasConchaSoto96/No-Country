@@ -43,7 +43,7 @@ const HeaderMobile = () => {
             <Link to="/products" onClick={handlerOpen}>
               Productos
             </Link>
-            <a href="#">Configuración</a>
+            <Link to="/settings">Configuración</Link>
             <a href="#" onClick={handlerLoginOut}>
               Cerrar Sesión
             </a>
