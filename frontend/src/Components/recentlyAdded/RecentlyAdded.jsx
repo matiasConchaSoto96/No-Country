@@ -30,11 +30,13 @@ function RecentlyAdded() {
             description={product.description}
             price={product.price}
             stock={product.stock}
-            category={product.id_category}
+            category={product.categories.name}
           />
         ))
       ) : (
-        <img src={loading} alt="Loader" className="loader" />
+        <div className="loading-container">
+          <img src={loading} alt="Loader" className="loader" />
+        </div>
       )}
     </div>
   );

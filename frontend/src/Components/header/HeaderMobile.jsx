@@ -19,7 +19,7 @@ const HeaderMobile = () => {
 
   const handlerLoginOut = () => {
     setUser({ ...user, logged: false });
-    localStorage.removeItem('user')
+    localStorage.removeItem("user");
     navigate("/login");
   };
 

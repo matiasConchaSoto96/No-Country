@@ -89,7 +89,6 @@ export const AppProvider = (props) => {
       .then((response) => response.json())
       .then((json) => console.log(json));
 
-
     setRequest(true);
   };
 
