@@ -28,7 +28,7 @@ const Modal = () => {
           </div>
           <article className="products-modal-article">
 
-            <form className="products-modal-form" method="post" encType="multipart/form-data">
+          <form className="products-modal-form" method="post" encType="multipart/form-data">
 
             <div className="products-modal-img-container">
               <label htmlFor="file">Agrega una imagen:</label>
@@ -54,28 +54,17 @@ const Modal = () => {
                   placeholder="Nombre"
                   required
                 />
-                <div className="form-featured-product flex-center">
-                <select 
-                value={id_category} 
-                onChange={handleChange} 
-                id="category" 
-                className="form-control" 
-                name="id_category" >
-                    <option>Categorias</option>
-                    {categories.length > 0
-                    ? categories.map((category) => (
-                        <option
-                          key={category.id}
-                          value={category.id}
-                          id={category.id}
-                        >
-                          {category.name}
-                        </option>
-                      ))
-                    : null}
-                  </select>
-                </div>
                 
+                <select 
+                value={featured} 
+                onChange={handleChange} 
+                id="featured" 
+                className="form-control" 
+                name="featured" >
+                    <option value="0">Destacar</option>
+                    <option value="1">Si</option>
+                    <option value="0">No</option>
+                </select>
               </div>
               <div className="form-price-discount">
                 <input
@@ -97,8 +86,30 @@ const Modal = () => {
                   required
                 />
               </div>
+              
+              <div className="form-category-product flex-center">
+                  <select 
+                  value={id_category} 
+                  onChange={handleChange} 
+                  id="category" 
+                  className="form-control" 
+                  name="id_category" >
+                      <option>Categorias</option>
+                      {categories.length > 0
+                      ? categories.map((category) => (
+                          <option
+                            key={category.id}
+                            value={category.id}
+                            id={category.id}
+                          >
+                            {category.name}
+                          </option>
+                        ))
+                      : null}
+                    </select>
+                </div>
               <div className="form-number-products flex-right">
-                <label>Cantidad de productos:</label>
+                <label htmlFor="number-products">Cantidad de productos:</label>
                 <input
                   className="number-products"
                   name="stock"
@@ -109,19 +120,6 @@ const Modal = () => {
                   required
                 />
               </div>
-              <div className="form-featured-product flex-center">
-              <select 
-              value={featured} 
-              onChange={handleChange} 
-              id="featured" 
-              className="form-control" 
-              name="featured" >
-                  <option value="0">Destacar</option>
-                  <option value="1">Si</option>
-                  <option value="0">No</option>
-                </select>
-              </div>
-
               <textarea
                 name="description"
                 value={description}
