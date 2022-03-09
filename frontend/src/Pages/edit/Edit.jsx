@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { useNavigate } from "react-router-dom";
+import Header from "../../Components/header/Header";
+import HeaderMobile from "../../Components/header/HeaderMobile";
 import "./edit.css";
 
 function Edit() {
@@ -29,7 +31,7 @@ function Edit() {
         stock: editProduct.stock,
         featured: editProduct.featured,
         discount: editProduct.discount,
-        id_category: editProduct.id_category
+        id_category: editProduct.id_category,
       });
     }
   }, []);
@@ -41,7 +43,6 @@ function Edit() {
     });
   };
 
-
   const handlerSubmit = (e) => {
     e.preventDefault();
     editProduct(productToEdit);
@@ -50,64 +51,82 @@ function Edit() {
 
   return (
     <div className="edit-page">
-      <header>
-        <div>LOGO</div>
-        <div>Editar Producto</div>
-      </header>
+      <Header />
       <div>
+        <h2>Editar Producto</h2>
         <div className="edit-form-container">
-          {/* <input name="file" type="file" value={newProduct.name} /> */}
-          <input
-            name="name"
-            type="text"
-            value={productToEdit.name}
-            onChange={handlerEdit}
-          />
-          <input
-            name="price"
-            type="number"
-            value={productToEdit.price}
-            onChange={handlerEdit}
-          />
-          <input
-            name="stock"
-            type="number"
-            value={productToEdit.stock}
-            onChange={handlerEdit}
-          />
-          <input
-            name="discount"
-            type="number"
-            value={productToEdit.discount}
-            onChange={handlerEdit}
-          />
-          <textarea
-            name="description"
-            cols="30"
-            rows="10"
-            value={productToEdit.description}
-            onChange={handlerEdit}
-          ></textarea>
+          {/* <input name="file" type="file" value={productToEdit.name} /> */}
+          <label>
+            Nombre
+            <input
+              name="name"
+              type="text"
+              value={productToEdit.name}
+              onChange={handlerEdit}
+            />
+          </label>
+          <label>
+            Precio{" "}
+            <input
+              name="price"
+              type="number"
+              value={productToEdit.price}
+              onChange={handlerEdit}
+            />
+          </label>
+          <label>
+            Stock{" "}
+            <input
+              name="stock"
+              type="number"
+              value={productToEdit.stock}
+              onChange={handlerEdit}
+            />{" "}
+          </label>
+          <label>
+            Descuento
+            <input
+              name="discount"
+              type="number"
+              value={productToEdit.discount}
+              onChange={handlerEdit}
+            />
+          </label>
+          <label>
+            {" "}
+            Categoria{" "}
+            <select
+              value={productToEdit.id_category}
+              onChange={handlerEdit}
+              id="category"
+              className="form-control"
+              name="id_category"
+            >
+              <option>Categorias</option>
+              {categories.length > 0
+                ? categories.map((category) => (
+                    <option
+                      key={category.id}
+                      value={category.id}
+                      id={category.id}
+                    >
+                      {category.name}
+                    </option>
+                  ))
+                : null}
+            </select>{" "}
+          </label>
+          <label className="edit-form-description">
+            Descripcion
+            <textarea
+              name="description"
+              cols="33"
+              rows="8"
+              value={productToEdit.description}
+              onChange={handlerEdit}
+            ></textarea>
+          </label>
 
-            <select 
-                value={productToEdit.id_category} 
-                onChange={handlerEdit} 
-                id="category" 
-                className="form-control" 
-                name="id_category" >
-                    <option>Categorias</option>
-                    {categories.length > 0
-                    ? categories.map((category) => (
-                        <option
-                          key={category.id}
-                          value={category.id}
-                          id={category.id}
-                        >
-                          {category.name}
-                        </option>
-                      ))
-                    : null}
-                  </select>
           <div className="edit-form-buttons-container">
             <button
               className="edit-form-button"
@@ -121,6 +140,7 @@ function Edit() {
           </div>
         </div>
       </div>
+      <HeaderMobile />
     </div>
   );
 }
