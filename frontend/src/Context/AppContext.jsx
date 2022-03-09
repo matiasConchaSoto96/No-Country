@@ -60,19 +60,18 @@ export const AppProvider = (props) => {
 
   const createProduct = (newProduct) => {
     let endpointRequest = `http://localhost:3001/api/`;
-    
+
     fetch(`${endpointRequest}`, {
       method: "POST",
       body: JSON.stringify(newProduct),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
-      },
+       },
     })
-      .then((response) => response.json())
-      .then((json) => console.log(json))
-      
-      setRequest(true);
+          
+    setRequest(true);
   }
+  
 
   // Put method
   const editProduct = (editedProduct) => {

@@ -21,13 +21,13 @@ module.exports = function(sequelize, dataTypes){
         featured:{
             type: dataTypes.INTEGER
         },
-        image:{
-            type: dataTypes.STRING
-        },
         discount: {
             type:dataTypes.INTEGER
         },
         id_category:{
+            type:dataTypes.INTEGER
+        },
+        id_image: {
             type:dataTypes.INTEGER
         }
     }
@@ -42,6 +42,11 @@ module.exports = function(sequelize, dataTypes){
             as: "categories",
             foreignKey: "id_category"
         });
+        
+        Product.belongsTo(models.Image, {
+            as: "images",
+            foreignKey: "id_image"
+        })
     }
 
     return Product

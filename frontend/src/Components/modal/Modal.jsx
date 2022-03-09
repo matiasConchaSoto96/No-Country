@@ -1,16 +1,41 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from 'axios'
 import { AppContext } from "../../Context/AppContext";
 import useForm from '../../Hooks/useForm'
 import "./modal.css";
 
 const Modal = () => {
-  const { setOpenModal, categories, createProduct } = useContext(AppContext);
-  const [form, handleChange] = useForm({ name: "", image: "", price: 0, discount: 0, featured: 0, stock: 0, description: "", id_category: 0});
-  const { name, image, price, discount, featured, stock, description, id_category } = form;
+  const { products, setOpenModal, categories, createProduct } = useContext(AppContext);
+  const [form, handleChange] = useForm({ name: "", price: 0, discount: 0, featured: 0, stock: 0, description: "", id_category: 0, id_image: 0});
+  const { name, price, discount, featured, stock, description, id_category, id_image } = form;
+  const [file, setFile] = useState()
+
+  useEffect(()=>{
+
+  }, [])
+
+  const handleChangeImage = (e) => {
+    e.preventDefault()
+    setFile(e.target.files[0])
+  }
 
   const handlerSubmit = (e) => {
     e.preventDefault()
-    createProduct(form)
+    
+    let imageRequest = `http://localhost:3001/api/images`;
+
+    const formData = new FormData();
+    formData.append('image', file)
+
+    axios.post(`${imageRequest}`, formData, {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    })
+    .then(response => {
+      const newData = {...form, id_image: response.data.data.id}
+      createProduct(newData)
+    })
     
   }
 
@@ -28,7 +53,7 @@ const Modal = () => {
           </div>
           <article className="products-modal-article">
 
-            <form className="products-modal-form" method="post" encType="multipart/form-data">
+            <form className="products-modal-form" encType="multipart/form-data">
 
             <div className="products-modal-img-container">
               <label htmlFor="file">Agrega una imagen:</label>
@@ -37,8 +62,7 @@ const Modal = () => {
                 className="products-modal-file"
                 id="file"
                 name="image"
-                value={image}
-                onChange={handleChange}
+                onChange={handleChangeImage}
                 type="file"
                 required
               />
@@ -56,7 +80,6 @@ const Modal = () => {
                 />
                 <div className="form-featured-product flex-center">
                 <select 
-                value={id_category} 
                 onChange={handleChange} 
                 id="category" 
                 className="form-control" 

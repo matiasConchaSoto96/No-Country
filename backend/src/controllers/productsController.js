@@ -7,27 +7,10 @@ const getUrl = (req) => {
 }
 
 module.exports = {
-    store:(req,res)=>{
+    store:(req, res, next)=>{
         let errors = validationResult(req);
-        if (req.fileValidatorError) {
-            let image = {
-                param: "image",
-                msg: req.fileValidatorError,
-            };
-        errors.push(image);
-        }
-
         if (errors.isEmpty()) {
-
-            let arrayImages;
-            if (req.files) {
-              req.files.forEach((image) => {
-                arrayImages = image.filename
-              });
-            }else{
-                arrayImages = "default-img.gif"
-            }
-
+            
             const {
                 name,
                 price,
@@ -36,6 +19,7 @@ module.exports = {
                 featured,
                 discount,
                 id_category,
+                id_image,
             } = req.body
 
             db.Product
@@ -47,7 +31,7 @@ module.exports = {
                 featured,
                 discount,
                 id_category,
-                image: arrayImages, 
+                id_image,
             })
             
             .then(productos => {
@@ -64,7 +48,51 @@ module.exports = {
         
         }
     },
+    imageCreate: function (req, res) {
+        let errors = validationResult(req);
+        if (req.fileValidatorError) {
+            let image = {
+                param: "image",
+                msg: req.fileValidatorError,
+            };
+            errors.push(image);
+        }
 
+        if (errors.isEmpty()) {
+            let { 
+                image
+            } = req.body;
+
+            db.Image.create({
+                image: req.file.filename,  
+            })
+            .then(productos => {
+                return res.status(200).json({
+                    meta:{
+                        status:200, 
+                        endpoint: getUrl(req),
+                        msg: "Producto creado con éxito"
+                    },
+                    data:productos,
+                })
+                .then((response) => response.json())
+            })
+            .catch(err => console.log)
+        } 
+    },
+    imageGet: function (req, res){
+        db.Image.findAll()
+            .then(images => {
+               return res.status(200).json({
+                meta:{
+                    status:200, 
+                    endpoint: getUrl(req),
+                    total: images.length
+                }, 
+                   data: images
+               })
+            })
+    },
     list: function (req,res){
         db.Product.findAll({
             include: [
