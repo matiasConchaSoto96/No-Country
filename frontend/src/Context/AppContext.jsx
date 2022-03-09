@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios'
 import { useState, createContext } from "react";
 
 export const AppContext = createContext();
@@ -78,9 +79,18 @@ export const AppProvider = (props) => {
   
 
   // Put method
-  const editProduct = (editedProduct) => {
+  const editProduct = (editedProduct, file) => {
     let endpointRequest = `http://localhost:3001/api/update`;
-    console.log(editedProduct)
+    let imageRequest = `http://localhost:3001/api/images/update/${editedProduct.images.id}`;
+
+    const formData = new FormData();
+    formData.append('image', file)
+
+    axios.put(`${imageRequest}`, formData, {
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+    })
 
     fetch(`${endpointRequest}/${productToEdit.id}`, {
       method: "PUT",

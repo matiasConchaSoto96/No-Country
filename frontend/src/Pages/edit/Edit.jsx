@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Components/header/Header";
@@ -14,8 +14,14 @@ function Edit() {
     categories,
     editProduct,
   } = useContext(AppContext);
+  const [file, setFile] = useState()
 
   let navigate = useNavigate();
+
+  const handleChangeImage = (e) => {
+    e.preventDefault()
+    setFile(e.target.files[0])
+  }
 
   useEffect(() => {
     if (idToEdit) {
@@ -32,22 +38,22 @@ function Edit() {
         featured: editProduct.featured,
         discount: editProduct.discount,
         id_category: editProduct.id_category,
-        images: editProduct.images.image
+        images: editProduct.images
       });
     }
   }, []);
-  console.log(productToEdit)
 
   const handlerEdit = (e) => {
     setProductToEdit({
       ...productToEdit,
       [e.target.name]: e.target.value,
     });
+
   };
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    editProduct(productToEdit);
+    editProduct(productToEdit, file);
     navigate("/products");
   };
 
@@ -57,8 +63,15 @@ function Edit() {
       <div>
         <h2>Editar Producto</h2>
         <div className="edit-form-container">
-          <img src={`images/${productToEdit.images}`}></img>
-          <input name="file" type="file" /> 
+          <img src={`images/${productToEdit.images.image}`}></img>
+          <input
+                className="products-modal-file"
+                id="file"
+                name="image"
+                onChange={handleChangeImage}
+                type="file"
+                required
+              />
           <label>
             Nombre
             <input

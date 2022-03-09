@@ -12,6 +12,7 @@ router.get("/categorias", productsController.category)
 // Metodo Post para crear - Joaquin
 router.post("/", productsController.store); 
 router.get("/images", productsController.imageGet);
+router.put("/images/update/:id", upload.single("image"), productsController.imageEdit);
 router.post("/images", upload.single("image"), productsController.imageCreate);
 
 // Metodo Put para editar el producto - Yonatan

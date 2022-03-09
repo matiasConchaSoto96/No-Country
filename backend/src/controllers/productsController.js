@@ -71,14 +71,30 @@ module.exports = {
                     meta:{
                         status:200, 
                         endpoint: getUrl(req),
-                        msg: "Producto creado con éxito"
+                        msg: "imagen subida con éxito"
                     },
                     data:productos,
                 })
                 .then((response) => response.json())
             })
-            .catch(err => console.log)
-        } 
+            .catch(err => console.log(err))
+        } else {
+            const errorsObj = errors.mapped();
+            for (key in errorsObj) {
+              delete errorsObj[key].param;
+              delete errorsObj[key].location;
+            }
+      
+            return res.status(200).json({
+              meta: {
+                ok: false,
+                status: 200,
+                msg: "No se subio la imagen",
+              },
+              data: null,
+              errors:errorsObj
+            });
+          }
     },
     imageGet: function (req, res){
         db.Image.findAll()
@@ -92,6 +108,32 @@ module.exports = {
                    data: images
                })
             })
+    },
+    imageEdit: function (req, res){
+        let { 
+            image
+        } = req.body;
+
+        db.Image.update({
+            image: req.file.filename,  
+        }, {
+            where: {
+                id: req.params.id,
+            }
+        })
+        .then(productos => {
+            return res.status(200).json({
+                meta:{
+                    status:200, 
+                    endpoint: getUrl(req),
+                    msg: "imagen editada con éxito"
+                },
+                data:productos,
+            })
+            .then((response) => response.json())
+        })
+        .catch(err => console.log(err))
+        
     },
     list: function (req,res){
         db.Product.findAll({
