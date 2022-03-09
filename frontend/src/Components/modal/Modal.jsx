@@ -9,10 +9,20 @@ const Modal = () => {
   const [form, handleChange] = useForm({ name: "", price: 0, discount: 0, featured: 0, stock: 0, description: "", id_category: 0, id_image: 0});
   const { name, price, discount, featured, stock, description, id_category, id_image } = form;
   const [file, setFile] = useState()
+  const [images, setImages] = useState([])
+  const [imageUrls, setImageUrls] = useState([])
+
+  useEffect(()=>{
+    if(images.length < 1) return;
+    const newImageUrls = []
+    images.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
+    setImageUrls(newImageUrls)
+  }, [images])
 
   const handleChangeImage = (e) => {
     e.preventDefault()
     setFile(e.target.files[0])
+    setImages([...e.target.files])
   }
 
   const handlerSubmit = (e) => {
@@ -52,6 +62,9 @@ const Modal = () => {
           <form className="products-modal-form" method="post" encType="multipart/form-data">
 
             <div className="products-modal-img-container">
+              <div className="products-modal-img-container_img">
+                {imageUrls.map(imageSrc => <img src={imageSrc} />)}
+              </div>
               <label htmlFor="file">Agrega una imagen:</label>
               <br />
               <input

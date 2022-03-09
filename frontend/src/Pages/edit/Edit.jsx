@@ -15,13 +15,23 @@ function Edit() {
     editProduct,
   } = useContext(AppContext);
   const [file, setFile] = useState()
+  const [images, setImages] = useState([])
+  const [imageUrls, setImageUrls] = useState([])
 
   let navigate = useNavigate();
 
   const handleChangeImage = (e) => {
     e.preventDefault()
     setFile(e.target.files[0])
+    setImages([...e.target.files])
   }
+  
+  useEffect(()=>{
+    if(images.length < 1) return;
+    const newImageUrls = []
+    images.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
+    setImageUrls(newImageUrls)
+  }, [images])
 
   useEffect(() => {
     if (idToEdit) {
@@ -63,7 +73,11 @@ function Edit() {
       <div>
         <h2>Editar Producto</h2>
         <div className="edit-form-container">
-          <img src={`images/${productToEdit.images.image}`}></img>
+          {images.length < 1 ?
+           <img src={`images/${productToEdit.images.image}`}></img>
+          : 
+          imageUrls.map(imageSrc => <img src={imageSrc} />)
+          }
           <input
                 className="products-modal-file"
                 id="file"
