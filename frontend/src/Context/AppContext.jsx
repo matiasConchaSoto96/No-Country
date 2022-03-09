@@ -43,6 +43,10 @@ export const AppProvider = (props) => {
       id: "",
       name: "",
     },
+    images: {
+      id: "",
+      image: "",
+    },
   });
 
   // Get and setProducts

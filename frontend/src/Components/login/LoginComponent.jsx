@@ -83,7 +83,7 @@ export const LoginComponent = () => {
               id="check"
               onChange={handleChangeCheck}
             ></input>
-            <label forHtml="check">Mantener la sesión abierta</label>
+            <label htmlFor="check">Mantener la sesión abierta</label>
           </div>
           <p>
             <button type="submit">Iniciar sesión</button>

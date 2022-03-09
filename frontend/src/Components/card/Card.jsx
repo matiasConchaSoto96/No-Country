@@ -3,13 +3,13 @@ import { AppContext } from "../../Context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 import "./card.css";
-import uno from "../../resources/uno.jpeg";
 
-function Card({ id, name, description, price, stock, category }) {
+function Card({ id, name, description, price, stock, category, image }) {
   return (
     <div className="card-container">
       <div className="image-container">
-        <img className="card-image" src={uno} alt="img" />
+      
+        <img className="card-image" src={`images/${image}`} alt="img" />
       </div>
       <div className="info-card-container">
         <h3>{name}</h3>

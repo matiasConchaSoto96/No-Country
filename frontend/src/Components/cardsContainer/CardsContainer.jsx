@@ -35,6 +35,7 @@ function CardsContainer() {
             price={product.price}
             stock={product.stock}
             category={product.categories.name}
+            image={product.images.image}
           />
         ))
       ) : (
