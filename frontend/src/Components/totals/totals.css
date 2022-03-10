@@ -14,13 +14,10 @@
   align-items: center;
 }
 
-.totals-container div {
+.totals-container .card {
   width: 20%;
-  height: 100px;
-  padding: 10px;
+  padding: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   border: solid 1px #274e64;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -29,16 +26,62 @@
   background-color: #03314b;
   color: whitesmoke;
 }
-
+.card-info {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: auto;
+}
+.card-info:nth-child(2) {
+  display: flex;
+  justify-content: center;
+}
+.card-info span {
+  color: #ccc;
+  font-size: 23px;
+}
+.card-info p {
+  font-size: 40px;
+}
+.icons {
+  background: rgba(156, 252, 200, 1);
+  text-align: center;
+  border-radius: 20px;
+  padding: 20px;
+}
+.icons svg {
+  font-size: 50px;
+}
+.icons path {
+  color: #274e64;
+}
 @media screen and (min-width: 321px) and (max-width: 768px) {
   .totals-container {
-    height: 400px;
+    padding-top: 10px;
+    height: fit-content;
     flex-direction: column;
     align-items: center;
   }
-
-  .totals-container div {
+  .totals-container .card {
     width: 70%;
+    padding: 10px;
+  }
+  .card {
+    flex-direction: column;
+  }
+  .card-info {
+    width: 100%;
+    text-align: center;
+  }
+  .card-info:nth-child(2) {
+    display: none;
+  }
+  .card-info span {
+    color: #ccc;
+    font-size: 20px;
+  }
+  .card-info p {
+    font-size: 30px;
   }
 }
 

@@ -95,11 +95,9 @@ const Modal = () => {
               encType="multipart/form-data"
             >
               <div className="products-modal-img-container">
-                <div className="products-modal-img-container_img">
                   {imageUrls.map((imageSrc) => (
                     <img src={imageSrc} />
                   ))}
-                </div>
                 <label htmlFor="file">Agrega una imagen:</label>
                 <br />
                 <input
