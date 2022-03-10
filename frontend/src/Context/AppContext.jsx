@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios'
+import axios from "axios";
 import { useState, createContext } from "react";
 
 export const AppContext = createContext();
@@ -27,10 +27,11 @@ export const AppProvider = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [errors, setErrors] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState("Todos");
   const [recent, setRecent] = useState([]);
   const [request, setRequest] = useState(true);
   const [idToEdit, setIdToEdit] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [productToEdit, setProductToEdit] = useState({
     id: "",
     name: "",
@@ -61,8 +62,11 @@ export const AppProvider = (props) => {
       .then((data) => {
         setProducts(data.data);
       });
+
+    setIsLoading(false);
   };
 
+  // Post method
   const createProduct = (newProduct) => {
     let endpointRequest = `http://localhost:3001/api/`;
 
@@ -71,12 +75,10 @@ export const AppProvider = (props) => {
       body: JSON.stringify(newProduct),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
-       },
-    })
-          
+      },
+    });
     setRequest(true);
-  }
-  
+  };
 
   // Put method
   const editProduct = (editedProduct, file) => {
@@ -84,13 +86,13 @@ export const AppProvider = (props) => {
     let imageRequest = `http://localhost:3001/api/images/update/${editedProduct.images.id}`;
 
     const formData = new FormData();
-    formData.append('image', file)
+    formData.append("image", file);
 
     axios.put(`${imageRequest}`, formData, {
       headers: {
         "Content-type": "multipart/form-data",
       },
-    })
+    });
 
     fetch(`${endpointRequest}/${productToEdit.id}`, {
       method: "PUT",
@@ -114,6 +116,32 @@ export const AppProvider = (props) => {
     });
 
     setRequest(true);
+  };
+
+  // Get and setCategories
+  const fetchAndSetCategories = () => {
+    let endpointRequest = `http://localhost:3001/api/categorias`;
+
+    fetch(endpointRequest)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setCategories(data.data);
+      });
+  };
+
+  // Post method category
+  const createNewCategory = (category) => {
+    let endpointRequest = `http://localhost:3001/api/categorias`;
+
+    fetch(`${endpointRequest}`, {
+      method: "POST",
+      body: JSON.stringify(category),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
   };
 
   return (
@@ -150,7 +178,10 @@ export const AppProvider = (props) => {
         newProduct,
         setNewProduct,
         editProduct,
-        createProduct
+        createProduct,
+        createNewCategory,
+        isLoading,
+        setIsLoading,
       }}
     >
       {props.children}

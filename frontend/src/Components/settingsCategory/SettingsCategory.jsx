@@ -1,9 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import "./settingsCategory.css";
 
 export default function SettingsCategory() {
-  const { categories, setCategories } = useContext(AppContext);
+  const { categories, setCategories, createNewCategory } =
+    useContext(AppContext);
+  const [newCategory, setNewCategory] = useState({ name: "" });
 
   useEffect(() => {
     let endpointRequest = `http://localhost:3001/api/categorias`;
@@ -15,6 +17,16 @@ export default function SettingsCategory() {
         setCategories(data.data);
       });
   }, [categories]);
+
+  const handlerNewCategory = (e) => {
+    setNewCategory({ name: e.target.value });
+  };
+
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    createNewCategory(newCategory);
+    setNewCategory({ name: "" });
+  };
 
   return (
     <div className="settings-category">
@@ -29,6 +41,8 @@ export default function SettingsCategory() {
         <input
           className="new-category"
           name="new-category"
+          value={newCategory.name}
+          onChange={handlerNewCategory}
           type="text"
           placeholder="Agregar categoría"
         />
@@ -37,6 +51,7 @@ export default function SettingsCategory() {
           name="btn-category"
           type="button"
           value="Enviar"
+          onClick={handlerSubmit}
         />
       </form>
     </div>

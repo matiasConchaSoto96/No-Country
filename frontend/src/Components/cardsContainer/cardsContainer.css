@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@800&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -11,6 +13,14 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.cards-container h2 {
+  height: 100vh;
+  margin-top: 150px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 30px;
+  text-align: center;
 }
 
 .loading-container {
