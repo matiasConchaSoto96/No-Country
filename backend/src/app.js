@@ -30,8 +30,16 @@ app.use(bodyParser.json());
 //Aquí estoy disponiendo la posibilidad para utilizar el seteo en los formularios para el usod e los metodos put ó delete
 app.use(methodOverride('_method'));
 
+app.get('/', function (req, res) {
+    res.send("Bienvenido a AdminGamer")
+})
+
 app.use('/api', routesApi);
 app.use('/user', routesUsers);
 
 //Activando el servidor desde express
-app.listen('3001', () => console.log('Servidor corriendo en el puerto http://localhost:3001/'));
+const PORT = process.env.PORT || 3001
+
+app.listen(PORT, function(){
+    console.log("servidor escuchando en el", PORT)
+});
