@@ -137,6 +137,7 @@ module.exports = {
     },
     list: function (req,res){
         db.Product.findAll({
+            order: [['id', 'DESC']],
             include: [
                 {association: "categories"},
                 {association: "images"}
