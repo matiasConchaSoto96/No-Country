@@ -130,7 +130,12 @@
   position: absolute;
   height: 100%;
 }
-
+.products-modal-article .products-modal-img-container img {
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  padding: 10px;
+}
 /* Estilos de las div que contienen los inputs */
 
 .products-modal-form div {
@@ -179,11 +184,15 @@
   background-color: #03314b;
   caret-color: #fff;
   outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
 }
-
 .products-modal-form div input[type="number"]::placeholder {
   font-size: 1rem;
   color: #fff;
+}
+.products-modal-form textarea {
+  text-align: left;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -242,8 +251,9 @@ input[type=number]::-webkit-outer-spin-button {
 /* select y div contenedora del select */
 .products-modal-form .form-category-product {
   display: initial;
-  width: 45%;
-  margin: 0;
+  width: 40%;
+  margin-left: -200px;
+  float: right;
 }
 
 .products-modal-form .form-category-product select {

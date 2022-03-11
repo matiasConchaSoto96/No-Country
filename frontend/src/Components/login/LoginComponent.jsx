@@ -71,6 +71,7 @@ export const LoginComponent = () => {
               name="password"
               value={password}
               onChange={handleChange}
+              type="password"
               placeholder="Contraseña"
             ></input>
             <div className="text-danger">

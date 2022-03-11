@@ -9,6 +9,7 @@ const loginValidator = require("../middlewares/loginValidator");
 router.get("/", usersControllers.list); /*haciendo prueba de lista de usuarios*/
 
 router.post("/register", registerValidator, usersControllers.store);
+router.put("/update/:id", registerValidator, usersControllers.editUser);
 
 router.post("/login", loginValidator, usersControllers.login);
 

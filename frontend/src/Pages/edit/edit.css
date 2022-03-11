@@ -53,6 +53,17 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
+.image-preview {
+  width: 300px;
+  height: 200px;
+  position: relative;
+  margin: auto;
+}
+.image-preview img {
+  width: inherit;
+  height: inherit;
+
+}
 .edit-form-container label {
   width: 90%;
   display: flex;

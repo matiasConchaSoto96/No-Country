@@ -73,11 +73,13 @@ function Edit() {
       <div className="edit-page-container">
         <h2>Editar Producto</h2>
         <div className="edit-form-container">
-          {images.length < 1 ?
-           <img src={`images/${productToEdit.images.image}`}></img>
-          : 
-          imageUrls.map(imageSrc => <img src={imageSrc} />)
-          }
+          <div className="image-preview">
+            {images.length < 1 ?
+            <img src={`images/${productToEdit.images.image}`}></img>
+            : 
+            imageUrls.map(imageSrc => <img src={imageSrc} />)
+            }
+          </div>
           <input
                 className="products-modal-file"
                 id="file"

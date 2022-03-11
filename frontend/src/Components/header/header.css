@@ -57,6 +57,9 @@ a:hover {
   text-decoration: none;
   color: #1ecc97;
 }
+.logo a img {
+  width: 300px;
+}
 
 .menu {
   display: flex;
