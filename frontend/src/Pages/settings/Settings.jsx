@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../Components/header/Header";
 import HeaderMobile from "../../Components/header/HeaderMobile";
 import SettingsCategory from "../../Components/settingsCategory/SettingsCategory";
@@ -10,6 +10,12 @@ import "./settings.css";
 export default function Settings() {
   const [active, setActive] = useState(false);
   const [showUserDisplay, setShowUserDisplay] = useState(true);
+  const [user, setUser] = useState({})
+
+  useEffect(()=> {
+    const user = JSON.parse(localStorage.getItem("user"))
+    setUser(user)
+  }, [])
 
   return (
     <>
@@ -51,7 +57,7 @@ export default function Settings() {
               >
                 <FontAwesomeIcon icon={faAngleRight} />
               </button>
-              <UserDisplay />
+              <UserDisplay user={user} />
             </article>
           ) : (
             <article className="category-settings-container">

@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./totals.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGamepad, faCoins, faCartArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 function Totals() {
+  const [totalProducts, setTotalProducts] = useState();
 
+  useEffect(() => {
+    let endpointRequest = `http://localhost:3001/api`;
+    fetch(endpointRequest)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setTotalProducts(data.meta.total);
+      });
+    }, []);
+    
   const totalData = [{
     type: "Productos",
-    total: 280,
+    total: totalProducts,
     icon: faGamepad,
   }, {
     type: "Ventas",
