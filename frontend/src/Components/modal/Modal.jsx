@@ -195,8 +195,8 @@ const Modal = () => {
                 value={description}
                 onChange={handleChange}
                 placeholder="Descripción"
-                cols="30"
-                rows="8"
+                cols="20"
+                rows="5"
                 required
               ></textarea>
               <input
