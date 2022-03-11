@@ -18,4 +18,4 @@ Es un administrador de stock de productos gamer, donde se podran agregar, editar
 - Joaquin Gorosito (Back-end Developer)
 - Jonatan Palacios (Full-stack Developer)
 
-<img src=""></img>
+<img src="https://github.com/No-Country/C3_G-71/blob/developer/frontend/public/ag.png?raw=true"></img>
