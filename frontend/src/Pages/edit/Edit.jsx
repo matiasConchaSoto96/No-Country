@@ -70,7 +70,7 @@ function Edit() {
   return (
     <div className="edit-page">
       <Header />
-      <div>
+      <div className="edit-page-container">
         <h2>Editar Producto</h2>
         <div className="edit-form-container">
           <div className="image-preview">
