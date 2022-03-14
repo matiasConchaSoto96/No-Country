@@ -8,13 +8,7 @@ export const AppProvider = (props) => {
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState([]);
 
-  const [user, setUser] = useState({
-    name: "",
-    lastname: "",
-    email: "",
-    password: "",
-    logged: false,
-  });
+  const [user, setUser] = useState({});
   const [newUser, setNewUser] = useState({
     name: "",
     lastname: "",
@@ -50,7 +44,6 @@ export const AppProvider = (props) => {
       image: "",
     },
   });
-
   // Get and setProducts
   const fetchAndSetProducts = () => {
     let endpointRequest = `http://localhost:3001/api`;

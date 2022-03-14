@@ -38,6 +38,19 @@
   height: inherit;
 }
 
+.products-modal .products-modal-content .products-modal-article select option,
+.products-modal .products-modal-content .products-modal-article textarea,
+.products-modal .products-modal-content .products-modal-article textarea::placeholder {
+  text-align: left;
+}
+
+.products-modal-img-container_img img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
 /* Btn modal close */
 
 .btn-modal-close-container {
@@ -91,23 +104,35 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
+  gap: 10px;
   align-items: center;
   width: 100%;
   height: 13rem;
   margin-bottom: 2rem;
   border: thin solid #1ecc97;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .products-modal-article .products-modal-img-container input {
-  cursor: pointer;
-}
-
-.products-modal-img {
   position: absolute;
+  top: 50%;
+  height: 50%;
+  cursor: pointer;
+  z-index: 900;
 }
 
+.products-modal-img-container_img {
+  position: absolute;
+  height: 100%;
+}
+.products-modal-article .products-modal-img-container img {
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  padding: 10px;
+}
 /* Estilos de las div que contienen los inputs */
 
 .products-modal-form div {
@@ -156,11 +181,15 @@
   background-color: #03314b;
   caret-color: #fff;
   outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
 }
-
 .products-modal-form div input[type="number"]::placeholder {
   font-size: 1rem;
   color: #fff;
+}
+.products-modal-form textarea {
+  text-align: left;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -219,8 +248,7 @@ input[type=number]::-webkit-outer-spin-button {
 /* select y div contenedora del select */
 .products-modal-form .form-category-product {
   display: initial;
-  width: 45%;
-  margin: 0;
+  width: 40%;
 }
 
 .products-modal-form .form-category-product select {
@@ -282,11 +310,32 @@ input[type=number]::-webkit-outer-spin-button {
   pointer-events: none;
 }
 
+.products-modal-article .products-modal-form .form-name-category .form-control { 
+  margin-bottom: 0; 
+  padding-top: 0;
+  text-align: center;
+}
+.products-modal-article .products-modal-form .form-category-product .form-control,
+.products-modal-article .products-modal-form .form-name-category .form-control  {
+    font-weight: 500;
+    text-align: left;
+  }
+
+.products-modal-article .products-modal-form .form-number-products { margin-top: .5rem; }
+
 @media screen and (max-width: 768px) {
+  /* sección del modal */
+  .products-modal {
+    align-items: flex-start;
+    overflow: auto;
+    padding-bottom: 80px;
+  }
+
   /* contenedor del modal */
   .products-modal-article {
     max-width: 18rem;
     padding: 2rem 1rem;
+    margin-top: .5rem;
   }
 
   /* formulari */
@@ -296,14 +345,14 @@ input[type=number]::-webkit-outer-spin-button {
 
   /* Btn modal close */
   .btn-modal-close-container {
-    top: 0;
+    top: .5rem;
     right: 0;
   }
 
   /* contenedor de la imágen */
   .products-modal-article .products-modal-img-container {
     justify-content: center;
-    gap: 0;
+    gap: 10px;
     width: 100%;
     height: 8rem;
     padding: 1rem;
@@ -314,10 +363,11 @@ input[type=number]::-webkit-outer-spin-button {
   }
 
   /* contenedores de las divs y estilos de los inputs */
-  .form-name-category,
-  .form-price-discount {
+  .products-modal-article .products-modal-form .form-name-category,
+  .products-modal-article .products-modal-form .form-price-discount {
     flex-direction: column;
-    width: 80%;
+    gap: .5rem;
+    margin-bottom: .5rem;
   }
 
   .products-modal-article .products-modal-form .form-name-category input,
@@ -325,10 +375,22 @@ input[type=number]::-webkit-outer-spin-button {
   .products-modal-article .products-modal-form .form-price-discount input,
   .products-modal-article .products-modal-form .form-category-product,
   .products-modal-article .products-modal-form .form-number-products {
+    text-align: left;
     width: 80%;
+  }
+
+  .products-modal-article .products-modal-form .form-category-product .form-control,
+  .products-modal-article .products-modal-form .form-name-category .form-control  {
+    font-weight: 500;
+    text-align: left;
   }
 
   .products-modal-article .products-modal-form .form-number-products label {
     width: 50%;
+  }
+
+  /* text area */
+  .products-modal-article textarea {
+    overflow: auto;
   }
 }

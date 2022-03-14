@@ -95,11 +95,9 @@ const Modal = () => {
               encType="multipart/form-data"
             >
               <div className="products-modal-img-container">
-                <div className="products-modal-img-container_img">
                   {imageUrls.map((imageSrc) => (
                     <img src={imageSrc} />
                   ))}
-                </div>
                 <label htmlFor="file">Agrega una imagen:</label>
                 <br />
                 <input
@@ -195,8 +193,8 @@ const Modal = () => {
                 value={description}
                 onChange={handleChange}
                 placeholder="Descripción"
-                cols="30"
-                rows="8"
+                cols="20"
+                rows="5"
                 required
               ></textarea>
               <input

@@ -1,13 +1,21 @@
 # AdminGamer
-### Para clonar el proyecto en tu pc ejecutar el siguiente código en tu consola:
+Es un administrador de stock de productos gamer, donde se podran agregar, editar y eliminar productos de dicho stock.
 
-- git clone https://github.com/YonPalac1/AdminGamer.git
 
-### Para correr la base de datos ingresar a la carpeta backend y ejecutar los siguientes comandos 
+### Stack
+- HTML
+- CSS
+- React
+- NodeJS
+- Express
+- Mysql
 
-- npm install (Para descargar las dependencias)
-- npm install nodemon -g (Para correr el server)
-### finalmente ejecutar nodemon
-- nodemon 
+### Roles
+- Joan Méndez (Team Leader)
 
-### Se deberá mostrar por consola "Servidor corriendo en el puerto 3001"
+- Matias Concha (Front-end Developer)
+- Luis Escalona (Front-end Developer)
+- Joaquin Gorosito (Back-end Developer)
+- Jonatan Palacios (Full-stack Developer)
+
+<img src="https://github.com/No-Country/C3_G-71/blob/developer/frontend/public/ag.png?raw=true"></img>

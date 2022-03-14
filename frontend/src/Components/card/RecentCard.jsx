@@ -2,11 +2,11 @@ import React from "react";
 import "./card.css";
 import uno from "../../resources/uno.jpeg";
 
-function RecentCard({ name, description, price, stock, category }) {
+function RecentCard({ name, description, price, stock, category, image }) {
   return (
     <div className="card-container">
       <div className="image-container">
-        <img className="card-image" src={uno} alt="img" />
+        <img className="card-image" src={`images/${image}`} alt="img" />
       </div>
       <div className="info-card-container">
         <h3>{name}</h3>

@@ -96,6 +96,7 @@ export const RegisterComponent = () => {
               value={password}
               onChange={handleChange}
               placeholder="Contraseña"
+              type="password"
             ></input>
             <div className="text-danger">
               {errors && errors["password"]?.msg}
@@ -107,6 +108,7 @@ export const RegisterComponent = () => {
               name="passwordConfirm"
               onChange={handleChangeComparePass}
               placeholder="Confirmar contraseña"
+              type="password"
             ></input>
             <div className="text-danger">{errorPass2}</div>
           </p>

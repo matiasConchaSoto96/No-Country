@@ -20,7 +20,9 @@ function Header() {
     <header className="header">
       <article className="container">
         <div className="logo">
-          <Link to="/">Logo</Link>
+          <Link to="/">
+            <img src="images/admingamerlogo.png" />
+          </Link>
         </div>
         <nav className="menu">
           <Link to="/">Home</Link>

@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faXmark, faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./headerMobile.css";
 // import burger from "../../resources/burger.svg";
 // import x from "../../resources/x.svg";
@@ -27,13 +29,13 @@ const HeaderMobile = () => {
     <header className="header-mobile">
       <article className="header-mobile-container">
         <button className="menu-btn-mobile" onClick={handlerOpen}>
-          {open ? "X" : "="}
+          {open ? <FontAwesomeIcon icon={faXmark} /> : <FontAwesomeIcon icon={faBars} />}
         </button>
         <div className="logo-mobile">
           <Link to="/">Logo</Link>
         </div>
         <button className="menu-btn-mobile" onClick={handlerAdd}>
-          +
+          <FontAwesomeIcon icon={faPlus} />
         </button>
         {open && (
           <nav className="menu-mobile">
