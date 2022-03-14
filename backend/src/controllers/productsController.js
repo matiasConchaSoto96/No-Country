@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator')
 const db = require('../database/models')
 const Op = db.Sequelize.Op;
 
@@ -6,41 +7,141 @@ const getUrl = (req) => {
 }
 
 module.exports = {
-    store:(req,res)=>{
-        const {
-            name,
-            price,
-            description,
-            stock,
-            featured,
-            discount,
-            id_category 
-        } = req.body
-        db.Product
-        .create({
-            name,
-            price,
-            description,
-            stock,
-            featured,
-            discount,
-            id_category 
-        })
+    store:(req, res, next)=>{
+        let errors = validationResult(req);
+        if (errors.isEmpty()) {
+            
+            const {
+                name,
+                price,
+                description,
+                stock,
+                featured,
+                discount,
+                id_category,
+                id_image,
+            } = req.body
+
+            db.Product
+            .create({
+                name,
+                price,
+                description,
+                stock,
+                featured,
+                discount,
+                id_category,
+                id_image,
+            })
+            
+            .then(productos => {
+                return res.status(200).json({
+                    meta:{
+                        status:200, 
+                        endpoint: getUrl(req),
+                        msg: "Producto creado con éxito"
+                    },
+                    data:productos,
+                })
+            })
         
+        
+        }
+    },
+    imageCreate: function (req, res) {
+        let errors = validationResult(req);
+        if (req.fileValidatorError) {
+            let image = {
+                param: "image",
+                msg: req.fileValidatorError,
+            };
+            errors.push(image);
+        }
+
+        if (errors.isEmpty()) {
+            let { 
+                image
+            } = req.body;
+
+            db.Image.create({
+                image: req.file.filename,  
+            })
+            .then(productos => {
+                return res.status(200).json({
+                    meta:{
+                        status:200, 
+                        endpoint: getUrl(req),
+                        msg: "imagen subida con éxito"
+                    },
+                    data:productos,
+                })
+                .then((response) => response.json())
+            })
+            .catch(err => console.log(err))
+        } else {
+            const errorsObj = errors.mapped();
+            for (key in errorsObj) {
+              delete errorsObj[key].param;
+              delete errorsObj[key].location;
+            }
+      
+            return res.status(200).json({
+              meta: {
+                ok: false,
+                status: 200,
+                msg: "No se subio la imagen",
+              },
+              data: null,
+              errors:errorsObj
+            });
+          }
+    },
+    imageGet: function (req, res){
+        db.Image.findAll()
+            .then(images => {
+               return res.status(200).json({
+                meta:{
+                    status:200, 
+                    endpoint: getUrl(req),
+                    total: images.length
+                }, 
+                   data: images
+               })
+            })
+    },
+    imageEdit: function (req, res){
+        let { 
+            image
+        } = req.body;
+
+        db.Image.update({
+            image: req.file.filename,  
+        }, {
+            where: {
+                id: req.params.id,
+            }
+        })
         .then(productos => {
             return res.status(200).json({
                 meta:{
                     status:200, 
                     endpoint: getUrl(req),
-                    msg: "Producto creado con éxito"
+                    msg: "imagen editada con éxito"
                 },
                 data:productos,
             })
-    })
-},
-
+            .then((response) => response.json())
+        })
+        .catch(err => console.log(err))
+        
+    },
     list: function (req,res){
-        db.Product.findAll()
+        db.Product.findAll({
+            include: [
+                {association: "categories"},
+                {association: "images"}
+             ]
+        })
             .then(productos => {
                return res.status(200).json({
                 meta:{
@@ -146,5 +247,76 @@ module.exports = {
             })
             .catch(error => console.log(error))
         }
+    },
+
+    category: function (req, res){
+        db.Category.findAll()
+            .then(categorias =>{
+                return res.status(200).json({
+                    meta:{
+                        status:200,
+                        endpoint:getUrl(req),
+                        total:categorias.length
+                    },
+                    data:categorias
+                })
+            })
+    },
+
+    getCategory: (req, res) => {
+        if(req.params.id % 1 !== 0 || req.params.id < 0){
+            return res.status(404).json({
+                meta: {
+                    status: 404,
+                    msg: "Id equivocado"
+                }
+            })
+        } else {
+            db.Category.findOne({
+                where: {
+                    id: req.params.id,
+                }
+            })
+            .then(cat => {
+                if(cat){
+                    return res.status(200).json({
+                        meta: {
+                            endpoint: getUrl(req),
+                            status: 200
+                        },
+                        data: cat
+                    })
+                } else {
+                    return res.status(404).json({
+                        meta: {
+                            status: 404,
+                            msg: "Id no encontrado"
+                        }
+                    })
+                }
+            })
+            .catch(error => console.log(error))
+        }
+    },
+    addCategory: (req, res) => {
+        const {
+            name,
+        } = req.body
+
+        db.Category
+        .create({
+            name,
+        })
+        
+        .then(category => {
+            return res.status(200).json({
+                meta:{
+                    status:200, 
+                    endpoint: getUrl(req),
+                    msg: "categoria creada con éxito"
+                },
+                data:category,
+            })
+        })
     }
 }

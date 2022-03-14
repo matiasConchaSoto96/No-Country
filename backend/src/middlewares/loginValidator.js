@@ -1,31 +1,46 @@
-const { body } = require("express-validator");
-const { compare } = require("bcrypt");
-const db = require("../database/models");
+const { check, body } = require('express-validator')
+let bcrypt = require('bcryptjs')
+const db = require('../database/models');
 
 module.exports = [
-  body("email")
+    check("email")
     .notEmpty()
-    .withMessage("Email requerido") // Si notEmpty esta vacio guarda un mensaje
-    .bail() // En caso de que la validación anterior haya fallado bail detiene la lectura
-
-    .isEmail() // Pregunta si es un email
-    .withMessage("Email invalido")
+    .withMessage("Debes escribir un email")
     .bail()
-    .custom(async (value) => { 
-      const email = await db.User.findOne({ email: value }); 
-      // Buscamos el VALUE enviado del formulario de login en la BD y en caso de que sea falso retornamos un mensaje
-      return !email && Promise.reject("Email no registrado");
+    .isEmail()
+    .withMessage("Debes escribir un email válido"),
+
+    check('password')
+    .notEmpty()
+    .withMessage('Debes escribir tu contraseña'),
+
+    body('email')
+    .custom(value => {
+        return db.User.findOne({
+            where: {
+                email : value
+            }
+        })
+        .then(user => {
+            if(!user){
+                return Promise.reject("Email incorrecto")
+            }
+        })
     }),
-
-  body("pass")
-    .notEmpty()
-    .withMessage("Contraseña requerida")
-    .bail()
-    .custom(async (value, {req}) => {
-      const user = await db.User.findOne({email: req.body.email});
-      if (user) {
-        const passwordTrue = await compare(value, user.password);
-        return !passwordTrue && Promise.reject("El email o la contraseña son incorrectas");
-      }
-    })
+  
+    body("password").custom((value, { req }) => {
+        return db.User.findOne({
+            where: {
+                email: req.body.email,
+            },
+        })
+        .then((user) => {
+            if (!bcrypt.compareSync(req.body.password, user.dataValues.password)) {
+                return Promise.reject();
+            }
+        })
+        .catch((error) => {
+            return Promise.reject("Contraseña incorrecta");
+        });
+    }),
 ];

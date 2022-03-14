@@ -8,26 +8,26 @@ module.exports = function(sequelize, dataTypes){
         },
         name:{
             type: dataTypes.STRING
-        } ,
+        },
         price:{
             type: dataTypes.INTEGER
-        } ,
+        },
         description:{
             type: dataTypes.STRING
-        } ,
+        },
         stock:{
             type: dataTypes.INTEGER
-        } ,
+        },
         featured:{
             type: dataTypes.INTEGER
-        } ,
-        /*img:{
-            type: dataTypes.  ¿que tipo es??
-        } ,*/
+        },
         discount: {
             type:dataTypes.INTEGER
         },
         id_category:{
+            type:dataTypes.INTEGER
+        },
+        id_image: {
             type:dataTypes.INTEGER
         }
     }
@@ -42,6 +42,11 @@ module.exports = function(sequelize, dataTypes){
             as: "categories",
             foreignKey: "id_category"
         });
+        
+        Product.belongsTo(models.Image, {
+            as: "images",
+            foreignKey: "id_image"
+        })
     }
 
     return Product

@@ -1,0 +1,260 @@
+/* Configuraciones iniciales */
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+.user-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  max-width: 300px;
+  padding: 1rem 2rem;
+  font-size: 16px;
+  background-color: #03314b;
+}
+
+.user-display p {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.user-display small {
+  color: #fff;
+}
+
+.user-display .user-nickname {
+  font-size: 1rem;
+}
+
+/**** Configuración del user editable y sus elementos internos ****/
+.user-editable {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.user-editable p {
+  margin-bottom: 1rem;
+}
+
+/* User info */
+.user-info {
+  width: 100%;
+}
+
+.user-info div {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.user-info div small {
+  margin-bottom: 1.5rem;
+}
+
+.user-info div p {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1.3rem;
+  border-bottom: thin solid #1ecc97;
+}
+
+.user-edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  max-width: 316px;
+  padding: 1rem 2rem;
+  font-size: 16px;
+  background-color: #03314b;
+}
+
+.user-edit p {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.user-edit small {
+  color: #fff;
+}
+
+.user-edit .user-nickname {
+  font-size: 1rem;
+}
+
+/**** Configuración del user editable y sus elementos internos ****/
+.user-editable {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.user-editable p {
+  margin-bottom: 1rem;
+}
+
+/* btn editable */
+.btn-editable-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 3px;
+  width: 80px;
+  height: 32px;
+  border: thin solid #274e64;
+  border-radius: 10px;
+  background-color: #03314b;
+  cursor: pointer;
+}
+
+.btn-editable-container p {
+  margin: 0;
+}
+
+.btn-editable-container .pencil-svg {
+  height: 34px;
+}
+
+.btn-editable-container hr {
+  width: 1px;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  background-color: #274e64;
+}
+
+.btn-editable-container small {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.btn-editable-container .align-self {
+  align-self: flex-end;
+}
+
+/* User form */
+.user-edit-form {
+  width: 100%;
+}
+
+.user-edit-form div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.user-edit-form div label {
+  font-size: smaller;
+  color: #fff;
+}
+
+.user-edit-form .uef-password-container {
+  flex-direction: row;
+  margin-bottom: 0;
+}
+
+.uef-password-container div {
+  width: 45%;
+}
+
+.user-edit-form .uef-show-password {
+  flex-direction: row;
+  justify-content: center;
+}
+
+/* User form input type text, email y password */
+.user-edit-form div input[type="text"],
+.user-edit-form div input[type="email"],
+.user-edit-form div input[type="password"] {
+  padding: 0.5rem;
+  font-size: 1.3rem;
+  border: 0;
+  border-bottom: thin solid #1ecc97;
+  color: #fff;
+  background-color: #03314b;
+  caret-color: #fff;
+  outline: none;
+}
+
+/* User form input type checked */
+.user-edit-form .uef-show-password {
+  margin-bottom: 1.5rem;
+}
+
+.user-edit-form input[type="checkbox"] + label::before {
+  content: "";
+  width: 1.2rem;
+  height: 1.2rem;
+  float: left;
+  margin: 0.7rem 0.5rem 0 0;
+  border: 2px solid #ccc;
+  background: #fff;
+  /* border: thin solid #1ecc97;
+  color: #1ecc97;
+  outline: none; */
+}
+
+.user-edit-form input[type="checkbox"]:checked + label::before {
+  border-color: #1ecc97;
+}
+
+.user-edit-form input[type="checkbox"]:checked + label::after {
+  content: "";
+  width: 1rem;
+  height: 0.5rem;
+  border: 4px solid #0fbf12;
+  float: left;
+  margin-left: -1.6rem;
+  border-right: 0;
+  border-top: 0;
+  margin-top: 1rem;
+  transform: rotate(-55deg);
+}
+
+.user-edit-form input[type="checkbox"] {
+  display: none;
+}
+
+.user-edit-form input[type="checkbox"] + label {
+  font-weight: bold;
+  line-height: 3em;
+  color: #fff;
+}
+
+.user-edit-form input[type="checkbox"]:checked + label {
+  color: #1ecc97;
+}
+
+/* User form input type button */
+.user-edit-form .uef-btn-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.user-edit-form input[type="button"] {
+  width: 45%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  background-color: #1ecc97;
+  cursor: pointer;
+  outline: none;
+}

@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { AppContext } from "../../Context/AppContext";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./categories.css";
 
 function Categories() {
+  const { categories, setCategories, setFilter, filter } =
+    useContext(AppContext);
+
+  useEffect(() => {
+    let endpointRequest = `http://localhost:3001/api/categorias`;
+    fetch(endpointRequest)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setCategories(data.data);
+      });
+  }, []);
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1030 },
@@ -22,6 +37,14 @@ function Categories() {
     },
   };
 
+  const classNameGenerator = (name, state) => {
+    let classNames = ["categories-button"];
+    if (name === state) {
+      classNames.push("selected-category");
+    }
+    return classNames.join(" ");
+  };
+
   return (
     <>
       <div className="carousel-container">
@@ -33,17 +56,23 @@ function Categories() {
           infinite={true}
           containerClass="carousel-container"
         >
-          <button className="categories-button">Categoria A</button>
-          <button className="categories-button">Categoria B</button>
-          <button className="categories-button">Categoria C</button>
-          <button className="categories-button">Categoria D</button>
-          <button className="categories-button">Categoria E</button>
-          <button className="categories-button">Categoria F</button>
-          <button className="categories-button">Categoria G</button>
-          <button className="categories-button">Categoria H</button>
-          <button className="categories-button">Categoria I</button>
-          <button className="categories-button">Categoria J</button>
-          <button className="categories-button">Categoria K</button>
+          {categories.length > 0 ? (
+            categories.map((category) => (
+              <button
+                className={classNameGenerator(category.name, filter)}
+                id={category.id}
+                key={category.id}
+                onClick={(e) => setFilter(e.target.name)}
+                name={category.name}
+              >
+                {category.name}
+              </button>
+            ))
+          ) : (
+            <div className="loading-categories">
+              <div>Cargando Categorias...</div>
+            </div>
+          )}
         </Carousel>
       </div>
     </>

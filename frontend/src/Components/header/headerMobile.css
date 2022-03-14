@@ -1,6 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap");
 html {
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-size: 16px;
   scroll-behavior: smooth;
 }
@@ -87,6 +88,8 @@ a:hover {
   opacity: 1;
   pointer-events: initial;
   transition: opacity 0.5s ease;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 .menu-mobile.is-active {
@@ -97,7 +100,7 @@ a:hover {
 .menu-mobile a {
   padding: 1rem;
   font-size: 20px;
-  font-weight: bold;
+  /* font-weight: bold; */
   text-align: center;
   text-decoration: none;
   color: #1ecc97;
